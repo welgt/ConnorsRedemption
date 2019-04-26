@@ -2,13 +2,12 @@ package connorsRedemption;
 
 public class testaJogo {
 	public static void main(String [] args) {
-    	TelaConfiguracoes t = new TelaConfiguracoes();
-    	
-    	
-    	
-    	
-    	
-    	
+    	jogo();
     	
     }
+	
+	public static void jogo() {
+		TelaConfiguracoes t = new TelaConfiguracoes();
+		
+	}
 }
