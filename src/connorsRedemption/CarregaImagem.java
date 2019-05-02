@@ -15,7 +15,7 @@ public class CarregaImagem {
 	}
 	
 	private BufferedImage connorImage() {
-		File arquivo = new File("C:\\dev\\workspace\\ConnorsRedemption\\images\\connor.png");
+		File arquivo = new File("C:\\Users\\celso.alineri\\Documents\\dev\\workspace\\ConnorsRedemption\\images\\connor.png");
 		
 		try {
 				BufferedImage imagem = ImageIO.read(arquivo);
