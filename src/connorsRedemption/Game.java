@@ -80,6 +80,10 @@ abstract public class Game implements WindowListener{
 		return janelaPrincipal.getHeight();
 	}
 	
+	public JFrame getJanelaPrincipal() {
+		return this.janelaPrincipal;
+	}
+	
 	abstract public void onCarregar();
 	
 	abstract public void onDescarregar();

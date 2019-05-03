@@ -43,31 +43,9 @@ public class Tela extends JPanel{
 	
 	@Override
     public void paint(Graphics g){
-        /*
-        // limpa a janela
-        Dimension d = this.getSize();
-        g.setColor(Color.BLUE);
-        g.fillOval((int) floor(d.getWidth()/2)-50,(int) floor(d.getHeight()/2)-25,50,50);
-        */
-        
-        //g.setColor(Color.BLACK);
-        //g.fillRect(750, 550, 50, 50);
         
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, 800, 600);
-        
-        //g.setColor(Color.DARK_GRAY);
-        //g.fillOval(150,200,200,40);
-        
-        //g.setColor(Color.RED);
-        //g.fillOval(100,80,150,150);
-        
-        //g.setColor(Color.PINK);
-        //g.fillOval(120,105,30,30);
-        
-        //g.setColor(Color.BLUE);
-        //g.setFont(new Font("Arial Bold", Font.PLAIN, 36));
-        //g.drawString("Projeto Integrador III", 30,450);
         
         CarregaImagem img = new CarregaImagem();
         
