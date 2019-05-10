@@ -84,6 +84,7 @@ public class Arma {
 		}
 	}
 
+	/*
 	// APENAS PARA DEBUGAR, DEPOIS SERA DELETADO.
 	public static void main(String[] args) {
 
@@ -112,6 +113,7 @@ public class Arma {
 		System.out.println("Status quantidade de bala atual: " + metralhadora.getQtdMunicao());
 		System.out.println("Status quantidade de Cartucho atual: " + metralhadora.getQtdCartucho());
 
-	}
 
+	}
+	*/
 }

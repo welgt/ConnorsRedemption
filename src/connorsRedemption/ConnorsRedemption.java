@@ -7,22 +7,19 @@ import java.awt.event.KeyListener;
 
 public class ConnorsRedemption extends Game implements KeyListener {
 	
-	private int x;
-	private int y;
 	private int velX;
 	private int velY;
-	private CarregaImagem img;
+	private Personagem jogador;
 	
 	public ConnorsRedemption() {
 		this.getJanelaPrincipal().addKeyListener(this);
 	}
 	
 	public void onCarregar() {
-		this.x = 0;
-		this.y = 0;
 		this.velX = 1;
 		this.velY = 1;
-		this.img = new CarregaImagem();
+		this.jogador = new Jogador("Connor");
+		
 	}
 	
 	public void onDescarregar() {
@@ -49,7 +46,8 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		//g.drawOval(this.x, this.y, 10, 10);
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		g.drawImage(img.connor, this.x, this.y, null);
+		g.transform(this.jogador.getRotacao());
+		g.drawImage(this.jogador.getImagem(), this.jogador.getPosX(), this.jogador.getPosY(), null);
 		
 	}
 	
@@ -59,16 +57,16 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
-				this.y -= 10;
+				jogador.andarCima();;
 				break;
 			case KeyEvent.VK_DOWN:
-				this.y += 10;
+				jogador.andarBaixo();;
 				break;
 			case KeyEvent.VK_LEFT:
-				this.x -= 10;
+				jogador.andarEsquerda();;
 				break;
 			case KeyEvent.VK_RIGHT:
-				this.x += 10;
+				jogador.andarDireita();;
 				break;
 			case KeyEvent.VK_ESCAPE:
 				this.finalizar();
