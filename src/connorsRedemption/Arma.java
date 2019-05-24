@@ -14,7 +14,7 @@ public class Arma {
 	private int qtdCartucho;
 	private int auxQtdMunicao;
 
-	public Arma (String nome, int qtdMunicao, int qtdCartucho, double qtdDano) {
+	public Arma(String nome, int qtdMunicao, int qtdCartucho, double qtdDano) {
 		this.nome = nome;
 		this.qtdMunicao = qtdMunicao;
 		this.auxQtdMunicao = qtdMunicao;
