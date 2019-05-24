@@ -5,7 +5,7 @@ import java.awt.Image;
 public class Arma {
 
 	private String nome;
-	private Image skin; // por hora acho que eh essa variavel que trabalharemos as imagens
+	private Image skin; // por hora -acho- que eh essa variavel que trabalharemos as imagens
 	private Image projetil;
 	private double qtdDano;
 	private double posX;
@@ -14,7 +14,7 @@ public class Arma {
 	private int qtdCartucho;
 	private int auxQtdMunicao;
 
-	public Arma(String nome, int qtdMunicao, int qtdCartucho, double qtdDano) {
+	public Arma (String nome, int qtdMunicao, int qtdCartucho, double qtdDano) {
 		this.nome = nome;
 		this.qtdMunicao = qtdMunicao;
 		this.auxQtdMunicao = qtdMunicao;
@@ -30,7 +30,6 @@ public class Arma {
 	public double getQtdDano(float qtdDano) {
 		return this.qtdDano;
 	}
-
 
 	public void setPosXY(float posX, float posY) {
 		this.posX = posX;
@@ -62,7 +61,7 @@ public class Arma {
 	}
 
 	public void atirar() {
-		if (getQtdMunicao() > 0 ) { //|| getQtdCartucho() > 0)
+		if (getQtdMunicao() > 0) { // || getQtdCartucho() > 0)
 			this.qtdMunicao--;
 		}
 	}
@@ -70,11 +69,12 @@ public class Arma {
 	public void carregar() {
 
 		if (this.getQtdCartucho() >= 1) {
-			this.qtdCartucho --;
-			this.qtdMunicao = this.auxQtdMunicao; // nao deixa estourar a quantidade de bala. e adapta-se em qualquer valor
-			                                      // no parametro "qtdMunicao"do construtor.
+			this.qtdCartucho--;
+			this.qtdMunicao = this.auxQtdMunicao; // nao deixa estourar a quantidade de bala. e adapta-se em qualquer
+													// valor
+													// no parametro "qtdMunicao"do construtor.
 			System.out.println("Recarreguei : " + getQtdMunicao()); // para debugar
-			
+
 		}
 
 		if (this.qtdCartucho <= 0) { // quando acabar teremos que adicionar a coleta de item de recarga de cartucho.
@@ -87,19 +87,19 @@ public class Arma {
 	// APENAS PARA DEBUGAR, DEPOIS SERA DELETADO.
 	public static void main(String[] args) {
 
-		
-		Arma metralhadora = new Arma ("metralhadora",30,4,55.5); // futuramente tambem pretendo entrar com o sprite como parametro
+		Arma metralhadora = new Arma("metralhadora", 30, 4, 55.5); // futuramente tambem pretendo entrar com o sprite
+																	// como parametro
 		System.out.println(metralhadora.getQtdMunicao());
 
 		System.out.println("Vou atirar!");
 		System.out.println("Quantidade de Cartucho: " + metralhadora.getQtdCartucho());
 
-		while (metralhadora.getQtdMunicao() > 0) { 
-			
+		while (metralhadora.getQtdMunicao() > 0) {
+
 			metralhadora.atirar();
-			if(metralhadora.getQtdCartucho()>0) {
-			System.out.println("Tiro: " + metralhadora.getQtdMunicao());
-			}else {
+			if (metralhadora.getQtdCartucho() > 0) {
+				System.out.println("Tiro: " + metralhadora.getQtdMunicao());
+			} else {
 				break;
 			}
 			if (metralhadora.getQtdMunicao() <= 1) {
