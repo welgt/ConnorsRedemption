@@ -1,5 +1,6 @@
 package connorsRedemption;
 
+import java.applet.AudioClip;
 import java.awt.Image;
 
 public class Arma {
@@ -13,8 +14,13 @@ public class Arma {
 	private int qtdMunicao;
 	private int qtdCartucho;
 	private int auxQtdMunicao;
+	//private AudioClip rajadaArma; // som ao coletar o item(ainda vou estudar como se faz isso
+    // so estou colocando pra nao me esquecer!)
+	
+	//private AudioClip carregarArma; // som ao coletar o item(ainda vou estudar como se faz isso
+    // so estou colocando pra nao me esquecer!)
 
-	public Arma (String nome, int qtdMunicao, int qtdCartucho, double qtdDano) {
+	public Arma(String nome, int qtdMunicao, int qtdCartucho, double qtdDano) {
 		this.nome = nome;
 		this.qtdMunicao = qtdMunicao;
 		this.auxQtdMunicao = qtdMunicao;
@@ -62,6 +68,7 @@ public class Arma {
 
 	public void atirar() {
 		if (getQtdMunicao() > 0) { // || getQtdCartucho() > 0)
+			// ativar audioClip rajadaArma
 			this.qtdMunicao--;
 		}
 	}
@@ -69,6 +76,7 @@ public class Arma {
 	public void carregar() {
 
 		if (this.getQtdCartucho() >= 1) {
+			// ativar AudioClip carregarArma
 			this.qtdCartucho--;
 			this.qtdMunicao = this.auxQtdMunicao; // nao deixa estourar a quantidade de bala. e adapta-se em qualquer
 													// valor
@@ -112,6 +120,7 @@ public class Arma {
 		System.out.println("Status quantidade de bala atual: " + metralhadora.getQtdMunicao());
 		System.out.println("Status quantidade de Cartucho atual: " + metralhadora.getQtdCartucho());
 
+		
 	}
 
 }
