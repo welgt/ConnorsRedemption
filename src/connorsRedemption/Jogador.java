@@ -24,7 +24,7 @@ public class Jogador extends Personagem{
 	public void andarCima() {
 		this.rot = 0;
 		this.posImg = (this.posImg + 1) % 6;
-		this.setPosY(this.getPosY() - 5);
+		this.setPosY(this.getPosY() - 10);
 		
 	}
 	
@@ -32,7 +32,7 @@ public class Jogador extends Personagem{
 	public void andarBaixo() {
 		this.rot = 180;
 		this.posImg = (this.posImg + 1) % 6;
-		this.setPosY(this.getPosY() + 5);
+		this.setPosY(this.getPosY() + 10);
 		
 	}
 	
@@ -40,7 +40,7 @@ public class Jogador extends Personagem{
 	public void andarEsquerda() {
 		this.rot = 270;
 		this.posImg = (this.posImg + 1) % 6;
-		this.setPosX(this.getPosX() - 5);
+		this.setPosX(this.getPosX() - 10);
 		
 	}
 	
@@ -48,7 +48,7 @@ public class Jogador extends Personagem{
 	public void andarDireita() {
 		this.rot = 90;
 		this.posImg = (this.posImg + 1) % 6;
-		this.setPosX(this.getPosX() + 5);
+		this.setPosX(this.getPosX() + 10);
 		
 	}
 
