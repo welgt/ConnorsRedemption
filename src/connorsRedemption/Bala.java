@@ -6,9 +6,9 @@ public class Bala {
 	
 	private Image skinBala;
 	private int danoBala;
-	private double velocidadeBala;
-	private double posX;
-	private double posY;
+	private float velocidadeBala;
+	private float posX;
+	private float posY;
 	
 	public Bala (Image skinBala, int danoBala) {
 		this.skinBala = skinBala;
@@ -35,19 +35,19 @@ public class Bala {
 		  // ajustar velocidade conforme poder de processamento de cada maquina
 	}
 	
-	public double getPosXbala() {
+	public float getPosXbala() {
 		return this.posX;
 	}
 	
-	public double getPosYbala() {
+	public float getPosYbala() {
 		return this.posY;
 	}
 	
-	public double getVelocidadeBala() {
+	public float getVelocidadeBala() {
 		return this.velocidadeBala;
 	}
 	
-	public void setPosicaoInicialBala (double x, double y) {
+	public void setPosicaoInicialBala (float x, float y) {
 		this.posX = x;
 		this.posY = y;
 	}

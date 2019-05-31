@@ -9,8 +9,8 @@ public class Arma {
 	private Image skin; // por hora -acho- que eh essa variavel que trabalharemos as imagens
 	private Image projetil;
 	// private double qtdDano; // a classe Bala passou a contror isso.
-	private double posX;
-	private double posY;
+	private float posArmX;
+	private float posArmY;
 	private int qtdMunicao;
 	private int qtdCartucho;
 	private int auxQtdMunicao;
@@ -41,24 +41,24 @@ public class Arma {
 	 */
 
 	public void setPosXY(float posX, float posY) {
-		this.posX = posX;
-		this.posY = posY;
+		this.posArmX = posX;
+		this.posArmY = posY;
 	}
 
-	public double getPosX() {
-		return this.posX;
+	public float getPosArmX() {
+		return this.posArmX;
 	}
 
-	public void setPosX(int posX) {
-		this.posX = posX;
+	public void setPosArmX(int posX) {
+		this.posArmX = posX;
 	}
 
-	public double getPosY() {
-		return this.posY;
+	public float getPosArmY() {
+		return this.posArmY;
 	}
 
-	public void setPosY(int posY) {
-		this.posY = posY;
+	public void setPosArmY(int posY) {
+		this.posArmY = posY;
 	}
 
 	public int getQtdMunicao() {
@@ -80,7 +80,8 @@ public class Arma {
 	public void atirar2(boolean gatilho) {
 		// if (getQtdMunicao() > 0) { // || getQtdCartucho() > 0)
 		while (gatilho && getQtdMunicao() > 0) {
-			Bala bala = new Bala(null, 10); // imagem e qtd dano da bala
+			Bala bala = new Bala(null, 10); // imagem(por hora nula) e qtd dano da bala
+			bala.setPosicaoInicialBala(getPosArmX(), getPosArmY());
 
 			bala.setVelocidadeBalaX(0.1f);
 			// ativar audioClip rajadaArma
