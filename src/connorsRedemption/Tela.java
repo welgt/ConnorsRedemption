@@ -49,7 +49,7 @@ public class Tela extends JPanel{
         
         CarregaImagem img = new CarregaImagem();
         
-        g.drawImage(img.connor, 0, 0, 120, 120, 0, 0, 120, 120, null);
+        g.drawImage(img.connor[0], 0, 0, 120, 120, 0, 0, 120, 120, null);
         
     }
 	
