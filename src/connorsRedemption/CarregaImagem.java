@@ -21,10 +21,6 @@ public class CarregaImagem {
 				BufferedImage imagem = ImageIO.read(arquivo);
 				BufferedImage[] img = new BufferedImage[8];
 				
-				System.out.println(imagem.getHeight());
-				System.out.println(imagem.getWidth());
-				
-				
 				//Recorta a imagem e coloca no vetor
 				img[0] = imagem.getSubimage(0,0,120,150);
 				img[1] = imagem.getSubimage(120,0,120,150);
