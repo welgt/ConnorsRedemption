@@ -7,11 +7,13 @@ public class Jogador extends Personagem{
 	
 	private final CarregaImagem img;
 	private int rot;
+	private int posImg;
 	
 	public Jogador(String nome) {
 		super(nome);
 		this.img = new CarregaImagem();
 		this.rot = 0;
+		this.posImg = 0;
 		this.setVelocidade(2);
 		this.setVida(3);
 		this.setSangue(100);
@@ -21,28 +23,32 @@ public class Jogador extends Personagem{
 	@Override
 	public void andarCima() {
 		this.rot = 0;
-		this.setPosY(this.getPosY() - 10);
+		this.posImg = (this.posImg + 1) % 6;
+		this.setPosY(this.getPosY() - 5);
 		
 	}
 	
 	@Override
 	public void andarBaixo() {
 		this.rot = 180;
-		this.setPosY(this.getPosY() + 10);
+		this.posImg = (this.posImg + 1) % 6;
+		this.setPosY(this.getPosY() + 5);
 		
 	}
 	
 	@Override
 	public void andarEsquerda() {
 		this.rot = 270;
-		this.setPosX(this.getPosX() - 10);
+		this.posImg = (this.posImg + 1) % 6;
+		this.setPosX(this.getPosX() - 5);
 		
 	}
 	
 	@Override
 	public void andarDireita() {
 		this.rot = 90;
-		this.setPosX(this.getPosX() + 10);
+		this.posImg = (this.posImg + 1) % 6;
+		this.setPosX(this.getPosX() + 5);
 		
 	}
 
@@ -72,7 +78,7 @@ public class Jogador extends Personagem{
 	
 	@Override
 	public BufferedImage getImagem() {
-		return img.connor[0];
+		return img.connor[this.posImg];
 		
 	}
 	
