@@ -15,10 +15,18 @@ public class Tela extends JPanel{
 	private final int altura;
 	private final int largura;
 	
+	public static int auxAltura; // criei para acessar esses valores sem ter que instaciar novo objeto.
+	public static int auxLargura;
+	
+	
+	
 	public Tela() {
 		super();
 		this.altura = 800;
 		this.largura = 600;
+		
+		this.auxAltura = altura;
+		this.auxLargura = largura;
 		
 		JFrame frame = new JFrame("Connor's Redemption");
 

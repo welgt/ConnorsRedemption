@@ -1,11 +1,19 @@
 package connorsRedemption;
 
+
 public class MainTester {
 	
 	// APENAS PARA DEBUGAR, DEPOIS SERA DELETADO.
 		public static void main(String[] args) {
 
-			Arma metralhadora = new Arma("metralhadora", 30, 4, 55.5); // futuramente tambem pretendo entrar com o sprite
+		//logicaArma1();
+		logicaArma2();	
+			
+		}
+		
+		public static void logicaArma1() {
+
+			Arma metralhadora = new Arma("metralhadora", 30, 4); // futuramente tambem pretendo entrar com o sprite
 																		// como parametro
 			System.out.println(metralhadora.getQtdMunicao());
 
@@ -14,7 +22,7 @@ public class MainTester {
 
 			while (metralhadora.getQtdMunicao() > 0) {
 
-				metralhadora.atirar();
+				metralhadora.atirar1();
 				if (metralhadora.getQtdCartucho() > 0) {
 					System.out.println("Tiro: " + metralhadora.getQtdMunicao());
 				} else {
@@ -29,21 +37,24 @@ public class MainTester {
 			System.out.println();
 			System.out.println("Status quantidade de bala atual: " + metralhadora.getQtdMunicao());
 			System.out.println("Status quantidade de Cartucho atual: " + metralhadora.getQtdCartucho());
-			
-			Ar ar = new Ar("gas", null, 0.0f, 0.0f); // so pra testar herança
-			
-			ar.detectarColisao("nomeObjeto", 0.0f, 0.0f); // so pra testar herança
-			
-			
 
 		}
 		
+		public static void logicaArma2() {
+			Arma metralhadora = new Arma("metralhadora", 30, 4); // futuramente tambem pretendo entrar com o sprite
+            
+			while(true) {
+				metralhadora.atirar2(true);
+				if(metralhadora.getQtdMunicao() == 0) {
+					break;
+				}
+					
+				
+			}
+		}
 		
-		
-
-
-
 }
+
 
 
 

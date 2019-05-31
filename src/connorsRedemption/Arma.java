@@ -8,24 +8,27 @@ public class Arma {
 	private String nome;
 	private Image skin; // por hora -acho- que eh essa variavel que trabalharemos as imagens
 	private Image projetil;
-	private double qtdDano;
+	// private double qtdDano; // a classe Bala passou a contror isso.
 	private double posX;
 	private double posY;
 	private int qtdMunicao;
 	private int qtdCartucho;
 	private int auxQtdMunicao;
-	//private AudioClip rajadaArma; // som ao coletar o item(ainda vou estudar como se faz isso
-    // so estou colocando pra nao me esquecer!)
-	
-	//private AudioClip carregarArma; // som ao coletar o item(ainda vou estudar como se faz isso
-    // so estou colocando pra nao me esquecer!)
 
-	public Arma(String nome, int qtdMunicao, int qtdCartucho, double qtdDano) {
+	// private AudioClip rajadaArma; // som ao coletar o item(ainda vou estudar como
+	// se faz isso
+	// so estou colocando pra nao me esquecer!)
+
+	// private AudioClip carregarArma; // som ao coletar o item(ainda vou estudar
+	// como se faz isso
+	// so estou colocando pra nao me esquecer!)
+
+	public Arma(String nome, int qtdMunicao, int qtdCartucho /* , double qtdDano */) {
 		this.nome = nome;
 		this.qtdMunicao = qtdMunicao;
 		this.auxQtdMunicao = qtdMunicao;
 		this.qtdCartucho = qtdCartucho;
-		this.qtdDano = qtdDano;
+		// this.qtdDano = qtdDano;
 
 	}
 
@@ -33,9 +36,9 @@ public class Arma {
 		this.projetil = projetil;
 	}
 
-	public double getQtdDano(float qtdDano) {
-		return this.qtdDano;
-	}
+	/*
+	 * public double getQtdDano(float qtdDano) { return this.qtdDano; }
+	 */
 
 	public void setPosXY(float posX, float posY) {
 		this.posX = posX;
@@ -66,10 +69,30 @@ public class Arma {
 		return this.qtdCartucho;
 	}
 
-	public void atirar() {
+	public void atirar1() {
 		if (getQtdMunicao() > 0) { // || getQtdCartucho() > 0)
 			// ativar audioClip rajadaArma
 			this.qtdMunicao--;
+
+		}
+	}
+
+	public void atirar2(boolean gatilho) {
+		// if (getQtdMunicao() > 0) { // || getQtdCartucho() > 0)
+		while (gatilho && getQtdMunicao() > 0) {
+			Bala bala = new Bala(null, 10); // imagem e qtd dano da bala
+
+			bala.setVelocidadeBalaX(0.1f);
+			// ativar audioClip rajadaArma
+			System.out.println("DEBUG : ATIROU");
+			this.qtdMunicao--;
+
+			if (bala.getPosXbala() < Tela.auxLargura || bala.getPosYbala() < Tela.auxAltura) {
+				bala = null;
+
+			}
+
+			// }
 		}
 	}
 
@@ -90,37 +113,6 @@ public class Arma {
 			System.out.println("Acabou qtd recarga (cartucho)"); // para debugar
 			this.qtdCartucho = 0; // por prevencao, para nao ficar negativando o cartucho.
 		}
-	}
-
-	// APENAS PARA DEBUGAR, DEPOIS SERA DELETADO.
-	public static void main(String[] args) {
-
-		Arma metralhadora = new Arma("metralhadora", 30, 4, 55.5); // futuramente tambem pretendo entrar com o sprite
-																	// como parametro
-		System.out.println(metralhadora.getQtdMunicao());
-
-		System.out.println("Vou atirar!");
-		System.out.println("Quantidade de Cartucho: " + metralhadora.getQtdCartucho());
-
-		while (metralhadora.getQtdMunicao() > 0) {
-
-			metralhadora.atirar();
-			if (metralhadora.getQtdCartucho() > 0) {
-				System.out.println("Tiro: " + metralhadora.getQtdMunicao());
-			} else {
-				break;
-			}
-			if (metralhadora.getQtdMunicao() <= 1) {
-				System.out.println("Tenho que recarregar");
-				metralhadora.carregar();
-				System.out.println("Quantidade de Cartucho: " + metralhadora.getQtdCartucho());
-			}
-		}
-		System.out.println();
-		System.out.println("Status quantidade de bala atual: " + metralhadora.getQtdMunicao());
-		System.out.println("Status quantidade de Cartucho atual: " + metralhadora.getQtdCartucho());
-
-		
 	}
 
 }

@@ -15,6 +15,7 @@ public class Bala {
 		this.danoBala = danoBala;
 	}
 	
+	
 	public void setDanoBala (int danoBala) {
 	    
 		this.danoBala = danoBala;
@@ -32,6 +33,14 @@ public class Bala {
 	public void setVelocidadeBalaY(float velocidadeBalaY) {
 		this.velocidadeBala = this.posY * velocidadeBalaY; // incrementa pixel em loop Game (confirmar)
 		  // ajustar velocidade conforme poder de processamento de cada maquina
+	}
+	
+	public double getPosXbala() {
+		return this.posX;
+	}
+	
+	public double getPosYbala() {
+		return this.posY;
 	}
 	
 	public double getVelocidadeBala() {
