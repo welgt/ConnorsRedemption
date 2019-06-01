@@ -79,11 +79,11 @@ public class Arma {
 
 	public void atirar2(boolean gatilho) {
 		// if (getQtdMunicao() > 0) { // || getQtdCartucho() > 0)
-		while (gatilho && getQtdMunicao() > 0) {
+		if (gatilho && getQtdMunicao() > 0) {
 			Bala bala = new Bala(null, 10); // imagem(por hora nula) e qtd dano da bala
 			bala.setPosicaoInicialBala(getPosArmX(), getPosArmY());
 
-			bala.setVelocidadeBalaX(0.1f);
+			bala.setVelocidadeBalaX(0.1f); // ajudar posteriormente velocidade
 			// ativar audioClip rajadaArma
 			System.out.println("DEBUG : ATIROU");
 			this.qtdMunicao--;
@@ -97,7 +97,7 @@ public class Arma {
 		}
 	}
 
-	public void carregar() {
+	public void carregarArma() {
 
 		if (this.getQtdCartucho() >= 1) {
 			// ativar AudioClip carregarArma
