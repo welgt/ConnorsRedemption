@@ -54,9 +54,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		AffineTransform at = AffineTransform.getTranslateInstance(this.x, this.y);
 		at.rotate(Math.toRadians(this.rot), 77, 77);
 		
-		g.drawImage(img.connor[0], at, null);
-		//g.drawImage(img.connor[1], at, null);
-		//g.drawImage(img.connor[2], at, null);
+		g.drawImage(img.connor, at, null);
 		
 	}
 	

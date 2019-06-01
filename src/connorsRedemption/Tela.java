@@ -15,10 +15,21 @@ public class Tela extends JPanel{
 	private final int altura;
 	private final int largura;
 	
+	public static int auxAltura;  // criei para acessar esses valores sem ter que instaciar novo objeto.
+	public static int auxLargura; // criei para acessar esses valores sem ter que instaciar novo objeto.
+	                              // dessa forma o jogo podera ser redimensionado e nao afetara a logica futuramente 
+	                     // por exemplo, estou destruindo a bala quando ela sai da tela(nao visivel para o jogador)
+	
+	
 	public Tela() {
 		super();
 		this.altura = 800;
 		this.largura = 600;
+		
+		this.auxAltura = altura;   // criei para acessar esses valores sem ter que instaciar novo objeto.
+		this.auxLargura = largura; // criei para acessar esses valores sem ter que instaciar novo objeto.
+								   // dessa forma o jogo podera ser redimensionado e nao afetara a logica futuramente
+		                 // por exemplo, estou destruindo a bala quando ela sai da tela(nao visivel para o jogador)
 		
 		JFrame frame = new JFrame("Connor's Redemption");
 
@@ -49,7 +60,7 @@ public class Tela extends JPanel{
         
         CarregaImagem img = new CarregaImagem();
         
-        g.drawImage(img.connor[0], 0, 0, 120, 120, 0, 0, 120, 120, null);
+        g.drawImage(img.connor, 0, 0, 120, 120, 0, 0, 120, 120, null);
         
     }
 	
