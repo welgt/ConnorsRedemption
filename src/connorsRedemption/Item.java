@@ -20,7 +20,19 @@ public class Item {
 		this.skin = skin;
 		this.posItemX = posX;
 		this.posItemY = posY;
-		this.raioColisao = 10; // tera que ajustar fazendo testes provavelmente.
+		this.raioColisao = 0; // tera que ajustar fazendo testes provavelmente.
+	}
+	
+	public float getPosItemX() {
+		return this.posItemX;
+	}
+	
+	public float getPosItemY() {
+		return this.posItemY;
+	}
+	
+	public String getNomeItem() {
+		return this.nome;
 	}
 	
 	public boolean detectarColisao(String nomeObjeto, float posXobjeto, float posYobjeto) {

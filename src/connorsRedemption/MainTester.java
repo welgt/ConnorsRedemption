@@ -65,5 +65,10 @@ public class MainTester {
 
 		}
 	}
+	
+	
+	public static void loopPrincipal() {
+		
+	}
 
 }
