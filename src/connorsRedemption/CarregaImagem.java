@@ -18,14 +18,27 @@ public class CarregaImagem {
 		File arquivo = new File("res\\images\\connor.png");
 		
 		try {
-				BufferedImage img = ImageIO.read(arquivo);
-				//BufferedImage imagens[][] = new BufferedImage[4][2];
+				BufferedImage imagem = ImageIO.read(arquivo);
+				BufferedImage[] img = new BufferedImage[8];
+				
+				//Recorta a imagem e coloca no vetor
+				img[0] = imagem.getSubimage(0,0,120,140);
+				img[1] = imagem.getSubimage(120,0,120,140);
+				
+				img[2] = imagem.getSubimage(0,135,120,140);
+				img[3] = imagem.getSubimage(120,145,120,130);
+				
+				img[4] = imagem.getSubimage(0,270,120,140);
+				img[5] = imagem.getSubimage(120,270,120,140);
+				
+				img[6] = imagem.getSubimage(0,405,120,140);
+				img[7] = imagem.getSubimage(120,405,120,140);
 				
 				//Recorta a imagem
 				img = img.getSubimage(0,0,120,120);
 			   	return img;
 			} catch (IOException e) {
-				throw new IllegalArgumentException("Não foi possível carregar o arquivo " + arquivo, e);
+				throw new IllegalArgumentException("Nï¿½o foi possï¿½vel carregar o arquivo " + arquivo, e);
 			}
 	}
 	

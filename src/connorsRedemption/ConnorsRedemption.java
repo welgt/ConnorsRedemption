@@ -4,27 +4,17 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.geom.AffineTransform;
 
 public class ConnorsRedemption extends Game implements KeyListener {
 	
-	private int x;
-	private int y;
-	private int velX;
-	private int velY;
-	private int rot;
-	private CarregaImagem img;
+	private Jogador connor;
 	
 	public ConnorsRedemption() {
 		this.getJanelaPrincipal().addKeyListener(this);
 	}
 	
 	public void onCarregar() {
-		this.x = 0;
-		this.y = 0;
-		this.velX = 1;
-		this.velY = 1;
-		this.img = new CarregaImagem();
+		this.connor = new Jogador("Connor");
 	}
 	
 	public void onDescarregar() {
@@ -47,14 +37,10 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	
 	public void onDesenhar(Graphics2D g) {
 		
-		//g.setColor(Color.WHITE);
-		//g.drawOval(this.x, this.y, 10, 10);
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
-		AffineTransform at = AffineTransform.getTranslateInstance(this.x, this.y);
-		at.rotate(Math.toRadians(this.rot), 77, 77);
 		
-		g.drawImage(img.connor, at, null);
+		g.drawImage(connor.getImagem(), connor.getRotacao(), null);
 		
 	}
 	
@@ -64,20 +50,16 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
-				this.y -= 10;
-				this.rot = 0;
+				connor.andarCima();
 				break;
 			case KeyEvent.VK_DOWN:
-				this.y += 10;
-				this.rot = 180;
+				connor.andarBaixo();
 				break;
 			case KeyEvent.VK_LEFT:
-				this.x -= 10;
-				this.rot = 270;
+				connor.andarEsquerda();
 				break;
 			case KeyEvent.VK_RIGHT:
-				this.x += 10;
-				this.rot = 90;
+				connor.andarDireita();
 				break;
 			case KeyEvent.VK_ESCAPE:
 				this.finalizar();

@@ -2,20 +2,18 @@ package connorsRedemption;
 
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 public class Jogador extends Personagem{
 	
-	private final BufferedImage image;
-	private double rotacao;
+	private final CarregaImagem img;
+	private int rot;
+	private int posImg;
 	
 	public Jogador(String nome) {
 		super(nome);
-		this.image = connorImage();
-		this.rotacao = 0.0;
+		this.img = new CarregaImagem();
+		this.rot = 0;
+		this.posImg = 0;
 		this.setVelocidade(2);
 		this.setVida(3);
 		this.setSangue(100);
@@ -23,35 +21,33 @@ public class Jogador extends Personagem{
 	}
 	
 	@Override
-	public AffineTransform getRotacao() {
-		AffineTransform at = new AffineTransform();
-        at.concatenate(AffineTransform.getScaleInstance(1, -1));
-        at.concatenate(AffineTransform.getTranslateInstance(0, -image.getHeight()));
-        return at;
-	}
-	
-	@Override
 	public void andarCima() {
-		this.rotacao = 0.0;
+		this.rot = 0;
+		this.posImg = (this.posImg + 1) % 6;
 		this.setPosY(this.getPosY() - 10);
 		
 	}
 	
 	@Override
 	public void andarBaixo() {
-		this.rotacao = Math.toRadians(180.0);
+		this.rot = 180;
+		this.posImg = (this.posImg + 1) % 6;
 		this.setPosY(this.getPosY() + 10);
 		
 	}
 	
 	@Override
 	public void andarEsquerda() {
+		this.rot = 270;
+		this.posImg = (this.posImg + 1) % 6;
 		this.setPosX(this.getPosX() - 10);
 		
 	}
 	
 	@Override
 	public void andarDireita() {
+		this.rot = 90;
+		this.posImg = (this.posImg + 1) % 6;
 		this.setPosX(this.getPosX() + 10);
 		
 	}
@@ -82,23 +78,16 @@ public class Jogador extends Personagem{
 	
 	@Override
 	public BufferedImage getImagem() {
-		return image.getSubimage(0, 0, 120, 120);
+		return img.connor[this.posImg];
 		
 	}
 	
-	private BufferedImage connorImage() {
-		File arquivo = new File("C:\\Users\\celso.alineri\\Documents\\dev\\workspace\\ConnorsRedemption\\res\\images\\connor.png");
-		//File arquivo = new File("connor.png");
+	@Override
+	public AffineTransform getRotacao() {
+		AffineTransform at = AffineTransform.getTranslateInstance(this.getPosX(), this.getPosY());
+		at.rotate(Math.toRadians(this.rot), 77, 77);
+		return at;
 		
-		try {
-				BufferedImage img = ImageIO.read(arquivo);
-				
-				//Recorta a imagem
-				//img = img.getSubimage(0,0,120,120);
-			   	return img;
-			} catch (IOException e) {
-				throw new IllegalArgumentException("Não foi possível carregar o arquivo " + arquivo, e);
-			}
 	}
 	
 
