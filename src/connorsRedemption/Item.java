@@ -5,7 +5,7 @@ import java.awt.Image;
 
 public class Item {
 	
-	private int texteHeran�a;
+	private int testeHeranca;
 	private String nome;
 	private Image skin;
 	private float posItemX;

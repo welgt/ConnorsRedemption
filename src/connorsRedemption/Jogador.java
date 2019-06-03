@@ -5,13 +5,13 @@ import java.awt.image.BufferedImage;
 
 public class Jogador extends Personagem{
 	
-	private final CarregaImagem img;
+	private final BufferedImage[] img;
 	private int rot;
 	private int posImg;
 	
-	public Jogador(String nome) {
+	public Jogador(String nome, BufferedImage[] img) {
 		super(nome);
-		this.img = new CarregaImagem();
+		this.img = img;
 		this.rot = 0;
 		this.posImg = 0;
 		this.setVelocidade(2);
@@ -78,7 +78,7 @@ public class Jogador extends Personagem{
 	
 	@Override
 	public BufferedImage getImagem() {
-		return img.connor[this.posImg];
+		return img[this.posImg];
 		
 	}
 	

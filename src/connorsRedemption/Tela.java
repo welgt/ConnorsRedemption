@@ -52,16 +52,4 @@ public class Tela extends JPanel{
 		return this.largura;
 	}
 	
-	@Override
-    public void paint(Graphics g){
-        
-        g.setColor(Color.WHITE);
-        g.fillRect(0, 0, 800, 600);
-        
-        CarregaImagem img = new CarregaImagem();
-        
-        g.drawImage(img.connor, 0, 0, 120, 120, 0, 0, 120, 120, null);
-        
-    }
-	
 }

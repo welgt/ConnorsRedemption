@@ -7,14 +7,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class CarregaImagem {
-	public BufferedImage connor;
+	public BufferedImage[] connor;
 	
 	public CarregaImagem() {
 		this.connor = connorImage();
 		
 	}
 	
-	private BufferedImage connorImage() {
+	private BufferedImage[] connorImage() {
 		File arquivo = new File("res\\images\\connor.png");
 		
 		try {
@@ -34,8 +34,6 @@ public class CarregaImagem {
 				img[6] = imagem.getSubimage(0,405,120,140);
 				img[7] = imagem.getSubimage(120,405,120,140);
 				
-				//Recorta a imagem
-				img = img.getSubimage(0,0,120,120);
 			   	return img;
 			} catch (IOException e) {
 				throw new IllegalArgumentException("N�o foi poss�vel carregar o arquivo " + arquivo, e);
