@@ -5,7 +5,7 @@ import java.awt.Image;
 
 public class Item {
 	
-	private int texteHerança;
+	private int testeHeranca;
 	private String nome;
 	private Image skin;
 	private float posItemX;
@@ -20,19 +20,7 @@ public class Item {
 		this.skin = skin;
 		this.posItemX = posX;
 		this.posItemY = posY;
-		this.raioColisao = 0; // tera que ajustar fazendo testes provavelmente.
-	}
-	
-	public float getPosItemX() {
-		return this.posItemX;
-	}
-	
-	public float getPosItemY() {
-		return this.posItemY;
-	}
-	
-	public String getNomeItem() {
-		return this.nome;
+		this.raioColisao = 10; // tera que ajustar fazendo testes provavelmente.
 	}
 	
 	public boolean detectarColisao(String nomeObjeto, float posXobjeto, float posYobjeto) {
