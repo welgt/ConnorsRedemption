@@ -121,6 +121,7 @@ public class Arma {
 			System.out.println("Teste de push git");
 			
 			System.out.println("Teste de push git");
+			System.out.println("Teste de push git");
 		}
 	}
 
