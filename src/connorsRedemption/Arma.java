@@ -114,6 +114,8 @@ public class Arma {
 			System.out.println("Acabou qtd recarga (cartucho)"); // para debugar
 			this.qtdCartucho = 0; // por prevencao, para nao ficar negativando o cartucho.
 
+			
+			System.out.println("teste merge git");
 		}
 	}
 
