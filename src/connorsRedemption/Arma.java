@@ -115,6 +115,7 @@ public class Arma {
 			this.qtdCartucho = 0; // por prevencao, para nao ficar negativando o cartucho.
 			
 			System.out.println("teste update na minha branch");
+			System.out.println("teste 2");
 		}
 	}
 
