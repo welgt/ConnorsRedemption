@@ -113,6 +113,8 @@ public class Arma {
 			// throw new RuntimeException("Acabou qtd recarga (cartucho)");
 			System.out.println("Acabou qtd recarga (cartucho)"); // para debugar
 			this.qtdCartucho = 0; // por prevencao, para nao ficar negativando o cartucho.
+			
+			System.out.println("teste update na minha branch");
 		}
 	}
 
