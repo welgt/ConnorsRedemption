@@ -10,8 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-
-
 public class Arma {
 
 	private String nome;
@@ -33,7 +31,7 @@ public class Arma {
 	// so estou colocando pra nao me esquecer!)
 
 	public Arma(String CaminhoImg, String nome, int qtdMunicao, int qtdCartucho /* , double qtdDano */) {
-		
+
 		this.imagemArma = new ImageIcon(getClass().getResource(CaminhoImg));
 		this.nome = nome;
 		this.qtdMunicao = qtdMunicao;
@@ -43,33 +41,32 @@ public class Arma {
 	}
 
 	public void setPosArma(int posX, int posY, int larguraImg, int alturaImg) {
-		arma.setBounds(this.posArmX=posX, this.posArmY=posY, larguraImg, alturaImg);
-		
+		arma.setBounds(this.posArmX = posX, this.posArmY = posY, larguraImg, alturaImg);
+
 	}
-	
+
 	public ImageIcon getImage() {
 		return this.imagemArma;
-		
+
 	}
-	
+
 	public void somTiro(boolean tocar) {
 		JButton escuta = new JButton();
 		escuta.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if(tocar) {
+				if (tocar) {
 					play();
 				}
 			}
 		});
 
-	
 	}
 
 	public void play() {
 		URL som = getClass().getResource("tiro1.wav");
-		AudioClip audio = Applet.newAudioClip (som);
+		AudioClip audio = Applet.newAudioClip(som);
 		audio.play();
 	}
 
@@ -140,35 +137,12 @@ public class Arma {
 
 		if (this.qtdCartucho <= 0) { // quando acabar teremos que adicionar a coleta de item de recarga de cartucho.
 			this.qtdCartucho = 0; // por prevencao, para nao ficar negativando o cartucho.
-			
 
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// APENAS PARA DEBUGAR, DEPOIS SERA DELETADO.
-	public static void main (String[] args) {
 
-		
+	// APENAS PARA DEBUGAR, DEPOIS SERA DELETADO.
+	public static void main(String[] args) {
 
 		System.out.println("logica arma 1");
 		logicaArma1(); // testando opcao metodo da bala atirar1()
@@ -188,9 +162,10 @@ public class Arma {
 
 	public static void logicaArma1() {
 
-		Arma metralhadora = new Arma("Arma1.png","metralhadora", 30, 4); // futuramente tambem pretendo entrar com o sprite
-																// como parametro
-		
+		Arma metralhadora = new Arma("Arma1.png", "metralhadora", 30, 4); // futuramente tambem pretendo entrar com o
+																			// sprite
+		// como parametro
+
 		System.out.println(metralhadora.getQtdMunicao());
 
 		System.out.println("Vou atirar!");
@@ -216,46 +191,28 @@ public class Arma {
 
 	}
 
-	public static void logicaArma2 () {
-		Arma metralhadora = new Arma("Arma1.png","metralhadora", 30, 4); // futuramente tambem pretendo entrar com o sprite
+	public static void logicaArma2() {
+		Arma metralhadora = new Arma("Arma1.png", "metralhadora", 30, 4); // futuramente tambem pretendo entrar com o
+																			// sprite
 
 		metralhadora.setPosArma(15, 10, 300, 300);
-		System.out.println(metralhadora.getPosArmX()+"  "+metralhadora.getPosArmY());
+		System.out.println(metralhadora.getPosArmX() + "  " + metralhadora.getPosArmY());
 		boolean atirar = true; // ao aperta uma tecla fica true;
 		while (true) { // representa "loop principal"
 			if (atirar) {
+				if (metralhadora.getQtdCartucho() == 0 && metralhadora.getQtdMunicao()==0) {
+					atirar = false;
+					System.out.println("\nAcabou os cartuchos.");
+				}
 				metralhadora.atirar2(atirar);
-				if(metralhadora.getQtdMunicao()==0) {
+				if (metralhadora.getQtdMunicao() == 0) {
 					metralhadora.carregarArma();
 				}
+
 			}
-			//atirar = false; // ao soltar uma tecla fica false;
+			// atirar = false; // ao soltar uma tecla fica false;
 
 		}
-	}
-	
-    public void windowOpened(WindowEvent e) {
-
-	}
-	
-	public void windowClosed(WindowEvent e) {
-		
-	}
-	
-	public void windowIconified(WindowEvent e) {
-		
-	}
-	
-	public void windowDeiconified(WindowEvent e) {
-		
-	}
-	
-	public void windowActivated(WindowEvent e) {
-		
-	}
-	
-	public void windowDeactivated(WindowEvent e) {
-		
 	}
 
 }
