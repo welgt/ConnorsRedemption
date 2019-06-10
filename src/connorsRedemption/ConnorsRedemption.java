@@ -6,6 +6,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.geom.AffineTransform;
 
+import sun.audio.AudioPlayer;
+
 public class ConnorsRedemption extends Game implements KeyListener {
 	
 	private int x;
@@ -14,6 +16,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	private int velY;
 	private int rot;
 	private CarregaImagem img;
+	private CarregaSom som;
 	
 	public ConnorsRedemption() {
 		this.getJanelaPrincipal().addKeyListener(this);
@@ -25,9 +28,12 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.velX = 1;
 		this.velY = 1;
 		this.img = new CarregaImagem();
+		this.som = new CarregaSom();
+		som.loop();
 	}
 	
 	public void onDescarregar() {
+		som.stop();
 		
 	}
 	
