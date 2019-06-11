@@ -22,21 +22,21 @@ public class CarregaImagem {
 				BufferedImage[] img = new BufferedImage[8];
 				
 				//Recorta a imagem e coloca no vetor
-				img[0] = imagem.getSubimage(0,0,120,140);
-				img[1] = imagem.getSubimage(120,0,120,140);
+				img[0] = imagem.getSubimage(0,0,50,50);
+				img[1] = imagem.getSubimage(50,0,50,50);
 				
-				img[2] = imagem.getSubimage(0,135,120,140);
-				img[3] = imagem.getSubimage(120,145,120,130);
+				img[2] = imagem.getSubimage(100,0,50,50);
+				img[3] = imagem.getSubimage(150,0,50,50);
 				
-				img[4] = imagem.getSubimage(0,270,120,140);
-				img[5] = imagem.getSubimage(120,270,120,140);
+				img[4] = imagem.getSubimage(0,50,50,50);
+				img[5] = imagem.getSubimage(50,50,50,50);
 				
-				img[6] = imagem.getSubimage(0,405,120,140);
-				img[7] = imagem.getSubimage(120,405,120,140);
+				img[6] = imagem.getSubimage(100,50,50,50);
+				img[7] = imagem.getSubimage(150,50,50,50);
 				
 			   	return img;
 			} catch (IOException e) {
-				throw new IllegalArgumentException("N�o foi poss�vel carregar o arquivo " + arquivo, e);
+				throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
 			}
 	}
 	

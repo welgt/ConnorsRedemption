@@ -5,34 +5,25 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import sun.audio.AudioPlayer;
-
 public class ConnorsRedemption extends Game implements KeyListener {
 	
-	private int x;
-	private int y;
-	private int velX;
-	private int velY;
-	private int rot;
-	private CarregaImagem img;
-	private CarregaSom som;
+	private CarregaImagem imagens;
+	private Jogador connor;
+	//private CarregaSom som;
 	
 	public ConnorsRedemption() {
 		this.getJanelaPrincipal().addKeyListener(this);
 	}
 	
 	public void onCarregar() {
-		this.x = 0;
-		this.y = 0;
-		this.velX = 1;
-		this.velY = 1;
-		this.img = new CarregaImagem();
-		this.som = new CarregaSom();
-		som.loop();
+		this.imagens = new CarregaImagem();
+		this.connor = new Jogador("Connor", imagens.connor);
+		//this.som = new CarregaSom();
+		//som.loop();
 	}
 	
 	public void onDescarregar() {
-		som.stop();
+		//som.stop();
 		
 	}
 	
