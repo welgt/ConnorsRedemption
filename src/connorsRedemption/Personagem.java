@@ -52,6 +52,7 @@ abstract public class Personagem {
 		this.velocidade = v;
 	}
 	
+	
 	public int getVida() {
 		return vida;
 	}
