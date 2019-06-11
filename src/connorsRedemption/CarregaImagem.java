@@ -48,7 +48,7 @@ public class CarregaImagem {
 	}
 	
 	private Image[] mapaImage() {
-		File arquivo = new File("res\\images\\map.png");
+		File arquivo = new File("res/imagens/map.png");  //(res\\images\\map.png) so funcionou assim aqui.
 		
 		try {
 				BufferedImage imagem = ImageIO.read(arquivo);
