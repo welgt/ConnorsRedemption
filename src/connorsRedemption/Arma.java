@@ -1,13 +1,8 @@
 package connorsRedemption;
 
-import java.applet.Applet;
 import java.applet.AudioClip;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.net.URL;
+import java.awt.geom.AffineTransform;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 
 public class Arma {
@@ -15,59 +10,32 @@ public class Arma {
 	private String nome;
 	private ImageIcon imagemArma;
 	private JLabel arma = new JLabel(imagemArma);
+	private AudioClip audio;
 	// private double qtdDano; // a classe Bala passou a contror isso.
 	private int posArmX;
 	private int posArmY;
 	private int qtdMunicao;
 	private int qtdCartucho;
 	private int auxQtdMunicao;
+	private int rot;
 
-	// private AudioClip rajadaArma; // som ao coletar o item(ainda vou estudar como
-	// se faz isso
-	// so estou colocando pra nao me esquecer!)
-
-	// private AudioClip carregarArma; // som ao coletar o item(ainda vou estudar
-	// como se faz isso
-	// so estou colocando pra nao me esquecer!)
-
-	public Arma(String CaminhoImg, String nome, int qtdMunicao, int qtdCartucho /* , double qtdDano */) {
-
-		this.imagemArma = new ImageIcon(getClass().getResource(CaminhoImg));
+	public Arma(String nome, int qtdMunicao, int qtdCartucho) {
 		this.nome = nome;
 		this.qtdMunicao = qtdMunicao;
 		this.auxQtdMunicao = qtdMunicao;
 		this.qtdCartucho = qtdCartucho;
+		this.rot = 0;
 
 	}
 
-	public void setPosArma(int posX, int posY, int larguraImg, int alturaImg) {
+	public void setImagem(String CaminhoImg, int posX, int posY, int larguraImg, int alturaImg) {
+		this.imagemArma = new ImageIcon(getClass().getResource(CaminhoImg));
 		arma.setBounds(this.posArmX = posX, this.posArmY = posY, larguraImg, alturaImg);
-
 	}
 
 	public ImageIcon getImage() {
 		return this.imagemArma;
 
-	}
-
-	public void somTiro(boolean tocar) {
-		JButton escuta = new JButton();
-		escuta.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (tocar) {
-					play();
-				}
-			}
-		});
-
-	}
-
-	public void play() {
-		URL som = getClass().getResource("tiro1.wav");
-		AudioClip audio = Applet.newAudioClip(som);
-		audio.play();
 	}
 
 	public float getPosArmX() {
@@ -94,6 +62,37 @@ public class Arma {
 		return this.qtdCartucho;
 	}
 
+/*
+	public  void newAudioClip(String url) {
+		URL musica = getClass().getResource("+url+");
+		this.audio = Applet.newAudioClip(musica);
+        //this.audio = new sun.applet.AppletAudioClip(musica);
+      
+    }
+/*	
+	public final static AudioClip newAudioClip(URL url) {
+        return new sun.applet.AppletAudioClip(url);
+    }
+	
+	public void setMusicaArma(String CaminhoAudio) {
+		URL musica = getClass().getResource("+CaminhoAudio+");
+		this.audio = Applet.newAudioClip(musica);
+
+	}
+	
+*/	
+
+	public void ligaMusicaArma() {
+		this.audio.play();
+		System.out.println("DEBUG: liga som do tiro.");
+	}
+	
+	public void desligaMusicaArma() {
+		this.audio.stop();
+		System.out.println("DEBUG: Desliga som do tiro.");
+	}
+
+
 	public void atirar1() {
 		if (getQtdMunicao() > 0) {
 			// ativar audioClip rajadaArma
@@ -105,12 +104,13 @@ public class Arma {
 	public void atirar2(boolean gatilho) {
 		if (gatilho && getQtdMunicao() > 0) {
 			Bala bala = new Bala(null, 10); // imagem(por hora nula) e qtd dano da bala
+		
 			System.out.println("DEBUG : ATIROU");
-			somTiro(true);
-			System.out.println("liga som do tiro.");
+		
+			
 			bala.setPosicaoInicialBala(getPosArmX(), getPosArmY());
-			somTiro(false);
-			System.out.println("desliga som do tiro.");
+		
+
 			bala.setVelocidadeBalaX(0.1f); // ajudar posteriormente velocidade
 			this.qtdMunicao--;
 
@@ -119,7 +119,7 @@ public class Arma {
 
 			}
 
-			// }
+			
 		}
 	}
 
@@ -141,6 +141,28 @@ public class Arma {
 		}
 	}
 
+	public int setRotacao(int rot) {
+		return this.rot = rot;
+	}
+
+	public AffineTransform getRotacao() {
+		AffineTransform at = AffineTransform.getTranslateInstance(getPosArmX(), getPosArmY());
+		at.rotate(Math.toRadians(this.rot), 0, 0);
+		return at;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 	// APENAS PARA DEBUGAR, DEPOIS SERA DELETADO.
 	public static void main(String[] args) {
 
@@ -154,17 +176,9 @@ public class Arma {
 
 	// funcoes
 
-	public static void testaSangue() {
-
-		Sangue itemSangue = new Sangue("Sangue", null, Tela.auxLargura / 2, Tela.auxAltura / 2);
-		itemSangue.detectarColisao("Connors", 1.0f, 1.0f);
-	}
-
 	public static void logicaArma1() {
 
-		Arma metralhadora = new Arma("Arma1.png", "metralhadora", 30, 4); // futuramente tambem pretendo entrar com o
-																			// sprite
-		// como parametro
+		Arma metralhadora = new Arma("Arma1.png", 30, 4); 
 
 		System.out.println(metralhadora.getQtdMunicao());
 
@@ -192,15 +206,14 @@ public class Arma {
 	}
 
 	public static void logicaArma2() {
-		Arma metralhadora = new Arma("Arma1.png", "metralhadora", 30, 4); // futuramente tambem pretendo entrar com o
-																			// sprite
+		Arma metralhadora = new Arma("Arma1.png", 30, 4); // futuramente tambem pretendo entrar com o
+															// sprite
 
-		metralhadora.setPosArma(15, 10, 300, 300);
 		System.out.println(metralhadora.getPosArmX() + "  " + metralhadora.getPosArmY());
 		boolean atirar = true; // ao aperta uma tecla fica true;
 		while (true) { // representa "loop principal"
 			if (atirar) {
-				if (metralhadora.getQtdCartucho() == 0 && metralhadora.getQtdMunicao()==0) {
+				if (metralhadora.getQtdCartucho() == 0 && metralhadora.getQtdMunicao() == 0) {
 					atirar = false;
 					System.out.println("\nAcabou os cartuchos.");
 				}
@@ -210,7 +223,7 @@ public class Arma {
 				}
 
 			}
-			// atirar = false; // ao soltar uma tecla fica false;
+			// atirar = false; // ao soltar uma tecla para de atirar;
 
 		}
 	}

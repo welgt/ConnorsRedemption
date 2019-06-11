@@ -1,17 +1,16 @@
 package connorsRedemption;
 
-import java.awt.Image;
-
 public class Ar extends Item {
 	
-	private double qtdAr;
-
-	public Ar(String nome, Image skin, float posX, float posY) {
-		super(nome, skin, posX, posY);
-		this.qtdAr = 3.0;
+	private int qtdAr;
+	
+	public Ar(String nome, int posItemX, int posItemY) {
+		super(nome, posItemX, posItemY);
+		this.qtdAr = 3;
+		
 	}
 	
-	public void setQtdAr (double qtdAr) {
+	public void setQtdAr (int qtdAr) {
 		this.qtdAr = qtdAr;
 	}
 	
