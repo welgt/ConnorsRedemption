@@ -1,5 +1,6 @@
 package connorsRedemption;
 
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -7,10 +8,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class CarregaImagem {
-	public BufferedImage[] connor;
+	private BufferedImage[] connor;
+	private Image[] mapa;
 	
 	public CarregaImagem() {
 		this.connor = connorImage();
+		this.mapa = mapaImage();
 		
 	}
 	
@@ -38,6 +41,34 @@ public class CarregaImagem {
 			} catch (IOException e) {
 				throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
 			}
+	}
+	
+	public BufferedImage[] getImgConnor() {
+		return this.connor;
+	}
+	
+	private Image[] mapaImage() {
+		File arquivo = new File("res\\images\\map.png");
+		
+		try {
+				BufferedImage imagem = ImageIO.read(arquivo);
+				Image[] img = new Image[2];
+				
+				//Recorta a imagem e coloca no vetor
+				BufferedImage temp;
+				temp = imagem.getSubimage(0,0,imagem.getWidth(),imagem.getHeight()/2);
+				img[0] = temp.getScaledInstance(780, 560, temp.SCALE_SMOOTH);
+				temp = imagem.getSubimage(0,imagem.getHeight()/2,imagem.getWidth(),imagem.getHeight()/2);
+				img[1] = temp.getScaledInstance(780, 560, temp.SCALE_SMOOTH);
+						
+			   	return img;
+			} catch (IOException e) {
+				throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
+			}
+	}
+	
+	public Image[] getImgMapa() {
+		return this.mapa;
 	}
 	
 }
