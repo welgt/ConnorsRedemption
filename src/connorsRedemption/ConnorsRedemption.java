@@ -6,8 +6,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class ConnorsRedemption extends Game implements KeyListener {
-	private CarregaImagem imagens; 
+	
+	private CarregaImagem imagens;
 	private Jogador connor;
+	//private CarregaSom som;
 	
 	public ConnorsRedemption() {
 		this.getJanelaPrincipal().addKeyListener(this);
@@ -16,9 +18,12 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	public void onCarregar() {
 		this.imagens = new CarregaImagem();
 		this.connor = new Jogador("Connor", imagens.connor);
+		//this.som = new CarregaSom();
+		//som.loop();
 	}
 	
 	public void onDescarregar() {
+		//som.stop();
 		
 	}
 	

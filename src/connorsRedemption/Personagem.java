@@ -8,49 +8,50 @@ abstract public class Personagem {
 	private final String nome;
 	
 	private Arma[] arma;
-	private int posX;
-	private int posY;
-	private float velocidade;
+	private double posX;
+	private double posY;
+	private double velocidade;
 	private int vida;
 	private float sangue;
 	
 	public Personagem(String nome) {
 		this.arma = new Arma[2];
 		this.nome = nome;
-		this.posX = 0;
-		this.posY = 0;
-		this.velocidade = 0;
+		this.posX = 0.0;
+		this.posY = 0.0;
+		this.velocidade = 0.0;
 		this.vida = 0;
 		this.sangue = 0;
 	}
 	
-	public int getPosX() {
+	public double getPosX() {
 		return this.posX;
 		
 	}
 	
-	public void setPosX(int x) {
+	public void setPosX(double x) {
 		this.posX = x;
 		
 	}
 	
-	public int getPosY() {
+	public double getPosY() {
 		return this.posY;
 		
 	}
 	
-	public void setPosY(int y) {
+	public void setPosY(double y) {
 		this.posY = y;
 		
 	}
 	
-	public float getVelocidade() {
+	public double getVelocidade() {
 		return this.velocidade;
 	}
 	
-	public void setVelocidade(float v) {
+	public void setVelocidade(double v) {
 		this.velocidade = v;
 	}
+	
 	
 	public int getVida() {
 		return vida;
