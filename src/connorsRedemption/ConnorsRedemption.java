@@ -9,24 +9,30 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	
 	private CarregaImagem imagens;
 	private Jogador connor;
-	private Jogador inimigo;
-	private Fase fase1;
+	private Bala bala;
+	private Personagem inimigo;
+	//private Fase fase1;
+	private int cont;
 	//private CarregaSom som;
 	
 	public ConnorsRedemption() {
 		this.getJanelaPrincipal().addKeyListener(this);
 		this.connor = null;
+		this.bala = null;
 		this.inimigo = null;
-		this.fase1 = null;
+		//this.fase1 = null;
+		this.cont = 1;
 	}
 	
 	public void onCarregar() {
 		this.imagens = new CarregaImagem();
-		this.connor = new Jogador("Connor", imagens.getImgConnor());
-		this.inimigo = new Jogador("Inimigo1", imagens.getImgInimigo());
-		this.fase1 = new Fase(imagens.getImgMapa());
+		this.connor = new Jogador("Connor", imagens.getImgConnor(), imagens.getImgTiro());
+		this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
+		//this.fase1 = new Fase(imagens.getImgMapa());
 		//this.som = new CarregaSom();
 		//som.loop();
+		this.inimigo.setPosX(500.0);
+		this.inimigo.setPosY(500.0);
 	}
 	
 	public void onDescarregar() {
@@ -35,17 +41,32 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	}
 	
 	public void onAtualizar() {
-		/*
-		this.x += this.velX;
-		this.y += this.velY;
-		
-		if(this.x < 0 || this.x > this.getWidth()) {
-			this.velX *= -1;
+
+		this.inimigo.andarEsquerda();
+		if(this.bala != null) {
+			if(!this.bala.colidiuTela()) {
+				if(this.bala.getDirecao() == 'd') {
+					this.bala.setPosicaoInicialBala(this.bala.getPosXbala()+0.05, this.bala.getPosYbala());
+				}
+				if(this.bala.getDirecao() == 'b') {
+					this.bala.setPosicaoInicialBala(this.bala.getPosXbala(), this.bala.getPosYbala()+0.05);
+				}
+				if(this.bala.getDirecao() == 'e') {
+					this.bala.setPosicaoInicialBala(this.bala.getPosXbala()-0.05, this.bala.getPosYbala());
+				}
+				if(this.bala.getDirecao() == 'c') {
+					this.bala.setPosicaoInicialBala(this.bala.getPosXbala(), this.bala.getPosYbala()-0.05);
+				}
+			}else{
+				
+				this.bala.setPosImgBala(3);
+				if(this.cont % 300 == 0) {
+					this.bala = null;
+					this.cont = 1;
+				}
+				this.cont++;
+			}
 		}
-		if(this.y < 0 || this.y > this.getHeight()) {
-			this.velY *= -1;
-		}
-		*/
 	}
 	
 	public void onDesenhar(Graphics2D g) {
@@ -53,8 +74,11 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 		
-		g.drawImage(this.fase1.getSubFaseImg(), this.fase1.getRotacao(), null);
+		//g.drawImage(this.fase1.getSubFaseImg(), this.fase1.getRotacao(), null);
 		g.drawImage(this.connor.getImagem(), this.connor.getRotacao(), null);
+		if(this.bala != null) {
+			g.drawImage(this.bala.getImgBala(), this.bala.getRotacao(), null);
+		}
 		g.drawImage(this.inimigo.getImagem(), this.inimigo.getRotacao(), null);
 		
 	}
@@ -75,6 +99,9 @@ public class ConnorsRedemption extends Game implements KeyListener {
 				break;
 			case KeyEvent.VK_RIGHT:
 				connor.andarDireita();
+				break;
+			case KeyEvent.VK_SPACE:
+				bala = connor.atirar();
 				break;
 			case KeyEvent.VK_ESCAPE:
 				this.finalizar();
