@@ -15,7 +15,7 @@ public class MainTester {
 
 	public static void testaSangue() {
 
-		Sangue itemSangue = new Sangue("Sangue", Tela.auxLargura / 2, Tela.auxAltura / 2);
+		Sangue itemSangue = new Sangue("Sangue", null, (Integer) null, Tela.auxLargura / 2);
 		itemSangue.detectarColisao("Connors", 1.0f, 1.0f);
 	}
 

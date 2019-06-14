@@ -13,6 +13,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	private Inimigo inimigo;
 	//private Fase fase1;
 	//private CarregaSom som;
+	private Item coracao;
 	
 	public ConnorsRedemption() {
 		this.getJanelaPrincipal().addKeyListener(this);
@@ -20,6 +21,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.bala = null;
 		this.inimigo = null;
 		//this.fase1 = null;
+		this.coracao = null;
 	}
 	
 	public void onCarregar() {
@@ -29,6 +31,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		//this.fase1 = new Fase(imagens.getImgMapa());
 		//this.som = new CarregaSom();
 		//som.loop();
+		this.coracao = new Item("coracao", imagens.getImgCoracao(), 0,0);
 	}
 	
 	public void onDescarregar() {
@@ -81,6 +84,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 			g.drawImage(this.bala.getImgBala(), this.bala.getRotacao(), null);
 		}
 		g.drawImage(this.inimigo.getImagem(), this.inimigo.getRotacao(), null);
+		g.drawImage(this.coracao.getImgItem(), this.coracao.getRotacao(), null);
 		
 	}
 	

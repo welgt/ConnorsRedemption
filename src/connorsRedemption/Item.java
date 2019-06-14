@@ -1,5 +1,6 @@
 package connorsRedemption;
 
+import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -7,69 +8,50 @@ import javax.swing.JLabel;
 public class Item {
 
 	private String nome;
-	private ImageIcon imagemItem;
-	private JLabel item = new JLabel(imagemItem);
+    private Image[] skinItem;
 	private int posX;
 	private int posY;
 	private int raioColisao;
-	private int larguraImg;
-	private int alturaImg;
-	private int rot;
+	private int rotItem;
 	// private AudioClip audioItem;
+	private int posImgItem;
 
-	public Item(String nome, int posX, int posY) {
+	public Item(String nome, Image[] skinItem,int posX, int posY) {
+		this.skinItem = skinItem;
 		this.nome = nome;
 		this.posX = posX;
 		this.posY = posY;
-		this.larguraImg = 200;
-		this.alturaImg = 200;
 		this.raioColisao = 10; // tera que ajustar fazendo testes provavelmente.
-		this.rot = 0;
+		this.posImgItem = 0;
 	}
 
-	public void setImagem(String CaminhoImg) {
 
-		this.imagemItem = new ImageIcon(getClass().getResource(CaminhoImg));
-		item.setBounds(getPosItemX(), getPosItemY(), getLarguraImg(), getAlturaImg());
-		// item.setBounds(this.posItemX = posX, this.posItemY = posY, getLarguraImg(),
-		// getAlturaImg());
-	}
 
-	public int getAlturaImg() {
-		return this.alturaImg;
-	}
 
-	public void setAlturaImg(int altura) {
-		this.alturaImg = altura;
-	}
 
-	public int getLarguraImg() {
-		return this.larguraImg;
-	}
-
-	public void setLarguraImg(int largura) {
-		this.larguraImg = largura;
-	}
-
-	public int getPosItemX() {
+	public int getPosX() {
 		return this.posX;
 	}
 
-	public void setPosItemX(int posicaoX) {
+	public void setPosIX(int posicaoX) {
 		this.posY = posicaoX;
 	}
 
-	public int getPosItemY() {
+	public int getPosY() {
 		return this.posY;
 	}
 
-	public void setPosItemY(int posicaoY) {
+	public void setPosY(int posicaoY) {
 		this.posY = posicaoY;
+	}
+	
+	public Image getImgItem() {
+		return this.skinItem[this.posImgItem];
 	}
 
 	public AffineTransform getRotacao() {
-		AffineTransform at = AffineTransform.getTranslateInstance(getPosItemX(), getPosItemY());
-		at.rotate(Math.toRadians(this.rot), 0, 0);
+		AffineTransform at = AffineTransform.getTranslateInstance(getPosX(), getPosY());
+		at.rotate(Math.toRadians(this.rotItem));
 		return at;
 	}
 
