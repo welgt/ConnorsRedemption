@@ -13,6 +13,7 @@ public class Bala {
 	private double posX;
 	private double posY;
 	private char direcao;
+	private int cont;
 	
 	public Bala (Image[] skinBala, int rotTiro, char direcao, int danoBala, double posX, double posY) {
 		this.skinBala = skinBala;
@@ -23,10 +24,19 @@ public class Bala {
 		this.posImgBala = 0;
 		this.rotTiro = rotTiro;
 		this.direcao = direcao;
+		this.cont = 0;
 	}
 	
 	public char getDirecao() {
 		return this.direcao;
+	}
+	
+	public int getCont() {
+		return this.cont;
+	}
+	
+	public void setCont(int x) {
+		this.cont = x;
 	}
 	
 	public void setPosImgBala(int x) {

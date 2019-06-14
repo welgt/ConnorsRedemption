@@ -10,9 +10,8 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	private CarregaImagem imagens;
 	private Jogador connor;
 	private Bala bala;
-	private Personagem inimigo;
+	private Inimigo inimigo;
 	//private Fase fase1;
-	private int cont;
 	//private CarregaSom som;
 	
 	public ConnorsRedemption() {
@@ -21,7 +20,6 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.bala = null;
 		this.inimigo = null;
 		//this.fase1 = null;
-		this.cont = 1;
 	}
 	
 	public void onCarregar() {
@@ -31,8 +29,6 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		//this.fase1 = new Fase(imagens.getImgMapa());
 		//this.som = new CarregaSom();
 		//som.loop();
-		this.inimigo.setPosX(500.0);
-		this.inimigo.setPosY(500.0);
 	}
 	
 	public void onDescarregar() {
@@ -42,9 +38,18 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	
 	public void onAtualizar() {
 
-		this.inimigo.andarEsquerda();
+		this.inimigo.setCont(this.inimigo.getCont() + 1);
+		boolean colisao = this.inimigo.colidiuBala(bala);
+		if(colisao) {
+			this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
+		}
+		if(this.inimigo.getCont() % 400 == 0) {
+			this.inimigo.andarEsquerda();
+			this.inimigo.setCont(0);
+		}
+		
 		if(this.bala != null) {
-			if(!this.bala.colidiuTela()) {
+			if(!this.bala.colidiuTela() && !colisao) {
 				if(this.bala.getDirecao() == 'd') {
 					this.bala.setPosicaoInicialBala(this.bala.getPosXbala()+0.05, this.bala.getPosYbala());
 				}
@@ -58,13 +63,9 @@ public class ConnorsRedemption extends Game implements KeyListener {
 					this.bala.setPosicaoInicialBala(this.bala.getPosXbala(), this.bala.getPosYbala()-0.05);
 				}
 			}else{
-				
 				this.bala.setPosImgBala(3);
-				if(this.cont % 300 == 0) {
-					this.bala = null;
-					this.cont = 1;
-				}
-				this.cont++;
+				this.bala.setCont(this.bala.getCont() + 1);
+				this.bala = null;
 			}
 		}
 	}
@@ -89,19 +90,19 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
-				connor.andarCima();
+				this.connor.andarCima();
 				break;
 			case KeyEvent.VK_DOWN:
-				connor.andarBaixo();
+				this.connor.andarBaixo();
 				break;
 			case KeyEvent.VK_LEFT:
-				connor.andarEsquerda();
+				this.connor.andarEsquerda();
 				break;
 			case KeyEvent.VK_RIGHT:
-				connor.andarDireita();
+				this.connor.andarDireita();
 				break;
 			case KeyEvent.VK_SPACE:
-				bala = connor.atirar();
+				this.bala = connor.atirar();
 				break;
 			case KeyEvent.VK_ESCAPE:
 				this.finalizar();
