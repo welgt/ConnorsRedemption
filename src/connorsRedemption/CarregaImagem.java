@@ -10,10 +10,12 @@ import javax.imageio.ImageIO;
 public class CarregaImagem {
 	private BufferedImage[] connor;
 	private Image[] mapa;
+	private BufferedImage[] inimigos;
 	
 	public CarregaImagem() {
 		this.connor = connorImage();
 		this.mapa = mapaImage();
+		this.inimigos = inimigoImage();
 		
 	}
 	
@@ -48,7 +50,7 @@ public class CarregaImagem {
 	}
 	
 	private Image[] mapaImage() {
-		File arquivo = new File("res/imagens/map.png");  //(res\\images\\map.png) so funcionou assim aqui.
+		File arquivo = new File("res\\imagens\\map.png");
 		
 		try {
 				BufferedImage imagem = ImageIO.read(arquivo);
@@ -69,6 +71,29 @@ public class CarregaImagem {
 	
 	public Image[] getImgMapa() {
 		return this.mapa;
+	}
+	
+	private BufferedImage[] inimigoImage(){
+		File arquivo = new File("res\\imagens\\char2.png");
+		
+		try {
+			BufferedImage imagem = ImageIO.read(arquivo);
+			BufferedImage[] img = new BufferedImage[3];
+			
+			//Recorta a imagem e coloca no vetor
+			img[0] = imagem.getSubimage(0,0,16,16);
+			img[1] = imagem.getSubimage(16,0,16,16);
+			img[2] = imagem.getSubimage(32,0,16,16);
+			
+		   	return img;
+		} catch (IOException e) {
+			throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
+		}
+		
+	}
+	
+	public BufferedImage[] getImgInimigo() {
+		return this.inimigos;
 	}
 	
 }
