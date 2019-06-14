@@ -15,9 +15,7 @@ public class Ar extends Item {
 	}
 	
 	public double getQtdAr () {
-		System.out.println();
 		return this.qtdAr;
-		
 	}
 
 }
