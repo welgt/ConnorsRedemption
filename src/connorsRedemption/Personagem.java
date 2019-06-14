@@ -1,7 +1,7 @@
 package connorsRedemption;
 
+import java.awt.Image;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 
 abstract public class Personagem {
 	
@@ -77,6 +77,8 @@ abstract public class Personagem {
 	
 	abstract public void andarDireita();
 	
+	abstract public Bala atirar();
+	
 	abstract public void ganhaVida(int v);
 	
 	abstract public void perdeVida();
@@ -87,6 +89,6 @@ abstract public class Personagem {
 	
 	abstract public AffineTransform getRotacao();
 	
-	abstract public BufferedImage getImagem();
+	abstract public Image getImagem();
 	
 }
