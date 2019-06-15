@@ -42,7 +42,9 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	
 	// toda logica que não deve ser atualizada.
 	public void onStart() {
-		this.coracao.trasladar(300, 300);
+    	
+		this.coracao.trasladar(Math.random()*(getHeight()-150), Math.random()*(getWidth()-50));
+		
 	}
 	
 	public void onAtualizar() {
@@ -80,13 +82,10 @@ public class ConnorsRedemption extends Game implements KeyListener {
 			}
 		}
 		
-	
-		
-		
-        if(coracao.colidiu(coracao, connor)) {
-        	this.coracao = new Vida("coracao", imagens.getImgCoracao(), 0,0);
-        }
+		ativaCoracao();
 
+		
+	
 	}
 	
 	public void onDesenhar(Graphics2D g) {
@@ -133,6 +132,25 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	}
 	
 	public void keyReleased(KeyEvent e) {
+	}
+	
+	
+	
+	
+	
+	
+	
+	// funcoes separadas da logica de cada objeto para manter organizado
+	public void ativaCoracao() {
+		
+        if(coracao.colidiu(coracao, connor)) {
+        	double randowA = Math.random()*(getHeight()-150);
+        	double randowL = Math.random()*(getWidth()-50);
+        	//this.coracao = new Vida("coracao", imagens.getImgCoracao(), randowL,randowA);
+        	this.coracao.trasladar(randowL, randowA);
+        	coracao.darVida(connor);
+        	System.out.println(connor.getVida());
+        }
 	}
 	
 

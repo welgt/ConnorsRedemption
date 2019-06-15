@@ -18,14 +18,18 @@ abstract public class Game implements WindowListener{
 		this.janelaPrincipal.setSize(800,600);
 		this.janelaPrincipal.addWindowListener(this);
 		this.jogoAtivo = false;
+		
+		
 	}
 	
 	public void finalizar() {
 		this.jogoAtivo = false;
+		
 	}
 	
 	public void executar() {
 		this.jogoAtivo = true;
+		
 		
 		this.carregar();
 		
