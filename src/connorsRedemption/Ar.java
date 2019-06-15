@@ -4,13 +4,15 @@ import java.awt.Image;
 import java.awt.geom.AffineTransform;
 
 public class Ar extends Item {
-	
-	private double qtdAr;
 
-	public Ar(String nome, Image[] skinItem, int posX, int posY) {
+	private double qtdAr;
+	
+	public Ar(String nome, Image skinItem, double posX, double posY) {
 		super(nome, skinItem, posX, posY);
 		// TODO Stub de construtor gerado automaticamente
 	}
+
+
 
 	public void setQtdAr (double qtdAr) {
 		this.qtdAr = qtdAr;

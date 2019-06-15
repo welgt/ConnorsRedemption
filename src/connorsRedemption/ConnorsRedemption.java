@@ -13,7 +13,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	private Inimigo inimigo;
 	//private Fase fase1;
 	//private CarregaSom som;
-	private Item coracao;
+	private Vida coracao;
 	
 	public ConnorsRedemption() {
 		this.getJanelaPrincipal().addKeyListener(this);
@@ -31,7 +31,8 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		//this.fase1 = new Fase(imagens.getImgMapa());
 		//this.som = new CarregaSom();
 		//som.loop();
-		this.coracao = new Item("coracao", imagens.getImgCoracao(), 0,0);
+		this.coracao = new Vida("coracao", imagens.getImgCoracao(), 0,0);
+		this.onStart();
 	}
 	
 	public void onDescarregar() {
@@ -39,10 +40,17 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		
 	}
 	
+	// toda logica que não deve ser atualizada.
+	public void onStart() {
+		this.coracao.trasladar(300, 300);
+	}
+	
 	public void onAtualizar() {
+		
 
 		this.inimigo.setCont(this.inimigo.getCont() + 1);
 		boolean colisao = this.inimigo.colidiuBala(bala);
+		
 		if(colisao) {
 			this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
 		}
@@ -71,6 +79,14 @@ public class ConnorsRedemption extends Game implements KeyListener {
 				this.bala = null;
 			}
 		}
+		
+	
+		
+		
+        if(coracao.colidiu(coracao, connor)) {
+        	this.coracao = new Vida("coracao", imagens.getImgCoracao(), 0,0);
+        }
+
 	}
 	
 	public void onDesenhar(Graphics2D g) {
@@ -85,6 +101,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		}
 		g.drawImage(this.inimigo.getImagem(), this.inimigo.getRotacao(), null);
 		g.drawImage(this.coracao.getImgItem(), this.coracao.getRotacao(), null);
+		
 		
 	}
 	

@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JLabel;
 
 public class CarregaImagem {
 	private Image[] connor;
@@ -13,7 +14,10 @@ public class CarregaImagem {
 	private Image[] mapa;
 	private Image[] inimigos;
 	
-	private Image[] coracaoVida;
+	private Image coracaoVida;
+	private Image imagemCoracaoMenor;
+	private int x;
+	private int y;
 	
 	public CarregaImagem() {
 		this.connor = connorImage();
@@ -22,7 +26,7 @@ public class CarregaImagem {
 		this.inimigos = inimigoImage();
 		
 		this.coracaoVida = coracaoVida();
-		
+
 	}
 	
 	private Image[] connorImage() {
@@ -129,30 +133,34 @@ public class CarregaImagem {
 		return this.inimigos;
 	}
 	
-	private Image[] coracaoVida() {
+	private Image coracaoVida() {
 	//private Image[] coracao() {
 		File arquivo = new File("res\\imagens\\coracao.png");
 		//File arquivo = new File("res/imagens/Coracao1.png");
 		
+		
 		try {
-				BufferedImage imagem = ImageIO.read(arquivo);
-				Image[] img = new Image[4];
+				BufferedImage  imagem = ImageIO.read(arquivo);
+				this.imagemCoracaoMenor = imagem.getScaledInstance(15,50,2);
+				//Image[] img = new Image[0];
 				//Image img = imagem.getSubimage(0,10,20,20);
 			
 				
+				
 				//Recorta a imagem e coloca no vetor
-				img[0] = imagem.getSubimage(0,100,20,20);
+				//img[0] = imagem.getSubimage(0,10,20,20);
 				//img[1] = imagem.getSubimage(0,120,20,20);
 				//img[2] = imagem.getSubimage(20,120,20,20);
 				//img[3] = imagem.getSubimage(40,120,20,20);
-
-			   	return img;
+				
+			   	return imagemCoracaoMenor;
 			} catch (IOException e) {
 				throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
 			}
 	}
+
 	
-	public Image[] getImgCoracao() {
+	public Image getImgCoracao() {
 		return this.coracaoVida;
 	}
 	

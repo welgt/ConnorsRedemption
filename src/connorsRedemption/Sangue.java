@@ -5,12 +5,9 @@ import java.awt.geom.AffineTransform;
 
 public class Sangue extends Item{
 
-	public Sangue(String nome, Image[] skinItem, int posX, int posY) {
+	public Sangue(String nome, Image skinItem, double posX, double posY) {
 		super(nome, skinItem, posX, posY);
-
+	
 	}
-
-
-
 }
 

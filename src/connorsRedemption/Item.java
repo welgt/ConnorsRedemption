@@ -1,43 +1,42 @@
 package connorsRedemption;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 public class Item {
 
-	private String nome;
-    private Image[] skinItem;
-	private int posX;
-	private int posY;
+	private final String nome;
+    private Image skinItem;
+	private double posX;
+	private double posY;
 	private int raioColisao;
 	private int rotItem;
 	// private AudioClip audioItem;
-	private int posImgItem;
 
-	public Item(String nome, Image[] skinItem,int posX, int posY) {
+
+	public Item(String nome, Image skinItem,double posX, double posY) {
 		this.skinItem = skinItem;
 		this.nome = nome;
 		this.posX = posX;
 		this.posY = posY;
-		this.raioColisao = 10; // tera que ajustar fazendo testes provavelmente.
-		this.posImgItem = 0;
+		this.raioColisao = 100; // tera que ajustar fazendo testes provavelmente.
+		
 	}
 
 
 
 
 
-	public int getPosX() {
+	public double getPosX() {
 		return this.posX;
 	}
 
-	public void setPosIX(int posicaoX) {
+	public void setPosX(int posicaoX) {
 		this.posY = posicaoX;
 	}
 
-	public int getPosY() {
+	public double getPosY() {
 		return this.posY;
 	}
 
@@ -46,23 +45,32 @@ public class Item {
 	}
 	
 	public Image getImgItem() {
-		return this.skinItem[this.posImgItem];
+		return this.skinItem;
 	}
 
 	public AffineTransform getRotacao() {
-		AffineTransform at = AffineTransform.getTranslateInstance(getPosX(), getPosY());
-		at.rotate(Math.toRadians(this.rotItem));
+		AffineTransform at = AffineTransform.getTranslateInstance(this.getPosX(), this.getPosY());
+		at.rotate(Math.toRadians(this.rotItem),skinItem.getWidth(null)/2, skinItem.getHeight(null)/2);
 		return at;
 	}
+	
+	public void trasladar(double posX, double posY) {
+		AffineTransform trans = AffineTransform.getTranslateInstance(this.posX = posX, this.posY = posY);
+	}
 
-	public boolean detectarColisao(String nomeObjeto, float posXobjeto, float posYobjeto) {
+	public boolean colidiu(Item coracao, Personagem connor) {
 
-		if (this.posX == posXobjeto - (this.raioColisao / 2)
-				|| this.posY == posYobjeto - (this.raioColisao / 2)) {
-			// tocar audioClip audioItem
-			return true;
+		if (coracao != null) {
+			
+			Rectangle r1 = new Rectangle((int) connor.getPosX(), (int) connor.getPosY(), 16, 16);
+			Rectangle r2 = new Rectangle((int) coracao.getPosX(), (int) coracao.getPosY(), 15, 50);
+			if (r1.intersects(r2)) {
+				return true;
+			}
 		}
 		return false;
+
 	}
+
 }
 
