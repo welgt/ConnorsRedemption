@@ -12,7 +12,8 @@ public class Item {
 	private double posY;
 	private int raioColisao;
 	private int rotItem;
-	private boolean darVida;
+	private boolean perdeuVida;
+
 	// private AudioClip audioItem;
 
 
@@ -22,7 +23,7 @@ public class Item {
 		this.posX = posX;
 		this.posY = posY;
 		this.raioColisao = 100; // tera que ajustar fazendo testes provavelmente.
-		this.darVida = false;
+		this.perdeuVida = false;
 		
 	}
 
@@ -62,16 +63,12 @@ public class Item {
 		AffineTransform trans = AffineTransform.getTranslateInstance(posX,posY);
 	}
 
-	public boolean colidiu(Item coracao, Personagem connor) {
+	public boolean colidiuCoracao(Item coracao, Personagem connor) {
 
 		if (coracao != null) {
-			
-			
-			
 			Rectangle r1 = new Rectangle((int) connor.getPosX(), (int) connor.getPosY(), 20, 20);
 			Rectangle r2 = new Rectangle((int) coracao.getPosX(), (int) coracao.getPosY(), 55, 55);
 			if (r1.intersects(r2)) {
-				this.darVida = true;
 				return true;
 				
 			}
@@ -79,14 +76,7 @@ public class Item {
 		return false;
 
 	}
-	
-	
-	public void darVida(Personagem connor) {
-		
-		if(darVida) {
-			connor.ganhaVida(+1);
-		}
-	}
+
 
 }
 

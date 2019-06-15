@@ -98,7 +98,7 @@ public class Inimigo extends Personagem{
 
 	@Override
 	public void perdeVida() {
-		this.setVida(this.getVida() - 1);
+		this.setVida((this.getVida() - 1));
 		
 	}
 

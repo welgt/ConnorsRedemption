@@ -44,49 +44,18 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	public void onStart() {
     	
 		this.coracao.trasladar(Math.random()*(getHeight()-150), Math.random()*(getWidth()-50));
+	
 		
 	}
 	
 	public void onAtualizar() {
 		
-
-		this.inimigo.setCont(this.inimigo.getCont() + 1);
-		boolean colisao = this.inimigo.colidiuBala(bala);
-		
-		if(colisao) {
-			this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
-		}
-		if(this.inimigo.getCont() % 400 == 0) {
-			this.inimigo.andarEsquerda();
-			this.inimigo.setCont(0);
-		}
-		
-		if(this.bala != null) {
-			if(!this.bala.colidiuTela() && !colisao) {
-				if(this.bala.getDirecao() == 'd') {
-					this.bala.setPosicaoInicialBala(this.bala.getPosXbala()+0.05, this.bala.getPosYbala());
-				}
-				if(this.bala.getDirecao() == 'b') {
-					this.bala.setPosicaoInicialBala(this.bala.getPosXbala(), this.bala.getPosYbala()+0.05);
-				}
-				if(this.bala.getDirecao() == 'e') {
-					this.bala.setPosicaoInicialBala(this.bala.getPosXbala()-0.05, this.bala.getPosYbala());
-				}
-				if(this.bala.getDirecao() == 'c') {
-					this.bala.setPosicaoInicialBala(this.bala.getPosXbala(), this.bala.getPosYbala()-0.05);
-				}
-			}else{
-				this.bala.setPosImgBala(3);
-				this.bala.setCont(this.bala.getCont() + 1);
-				this.bala = null;
-			}
-		}
-		
+		colisaoConnorBalaTela();
 		ativaCoracao();
-
-		
-	
+		connorPerdeVida();
 	}
+	
+	
 	
 	public void onDesenhar(Graphics2D g) {
 		
@@ -105,6 +74,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	}
 	
 	public void keyTyped(KeyEvent e) {
+		
 	}
 	
 	public void keyPressed(KeyEvent e) {
@@ -132,6 +102,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	}
 	
 	public void keyReleased(KeyEvent e) {
+		
 	}
 	
 	
@@ -141,16 +112,72 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	
 	
 	// funcoes separadas da logica de cada objeto para manter organizado
-	public void ativaCoracao() {
+	
+	public void colisaoConnorBalaTela() {
+		this.inimigo.setCont(this.inimigo.getCont() + 1);
+		boolean colisao = this.inimigo.colidiuBala(bala);
 		
-        if(coracao.colidiu(coracao, connor)) {
-        	double randowA = Math.random()*(getHeight()-150);
-        	double randowL = Math.random()*(getWidth()-50);
-        	//this.coracao = new Vida("coracao", imagens.getImgCoracao(), randowL,randowA);
-        	this.coracao.trasladar(randowL, randowA);
-        	coracao.darVida(connor);
-        	System.out.println(connor.getVida());
-        }
+		if(colisao) {
+
+			this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
+		}
+		if(this.inimigo.getCont() % 400 == 0) {
+			this.inimigo.andarEsquerda();
+			this.inimigo.setCont(0);
+		}
+		
+		if(this.bala != null) {
+			if(!this.bala.colidiuTela() && !colisao) {
+				if(this.bala.getDirecao() == 'd') {
+					this.bala.setPosicaoInicialBala(this.bala.getPosXbala()+0.05, this.bala.getPosYbala());
+				}
+				if(this.bala.getDirecao() == 'b') {
+					this.bala.setPosicaoInicialBala(this.bala.getPosXbala(), this.bala.getPosYbala()+0.05);
+				}
+				if(this.bala.getDirecao() == 'e') {
+					this.bala.setPosicaoInicialBala(this.bala.getPosXbala()-0.05, this.bala.getPosYbala());
+				}
+				if(this.bala.getDirecao() == 'c') {
+					this.bala.setPosicaoInicialBala(this.bala.getPosXbala(), this.bala.getPosYbala()-0.05);
+				}
+			}else{
+				this.bala.setPosImgBala(3);
+				this.bala.setCont(this.bala.getCont() + 1);
+				this.bala = null;
+			}
+		}
+	}
+	
+	
+	
+	
+	
+	public void ativaCoracao() {
+
+		if (coracao.colidiuCoracao(coracao, connor)) {
+			double randowA = Math.random() * (getHeight() - 150);
+			double randowL = Math.random() * (getWidth() - 50);
+			// this.coracao = new Vida("coracao", imagens.getImgCoracao(), randowL,randowA);
+			this.coracao.trasladar(randowL, randowA);
+			connor.ganhaVida(1);
+			System.out.println(connor.getVida());
+			
+
+		   
+		}
+		
+
+	}
+	
+	public void connorPerdeVida() {
+		
+		if (connor.colidiuInimigo(inimigo, connor)) {
+			connor.perdeVida();
+			System.out.println("perdeu vida "+connor.getVida());
+			this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
+		
+		}
+		
 	}
 	
 

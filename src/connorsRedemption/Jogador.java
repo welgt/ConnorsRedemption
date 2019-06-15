@@ -90,7 +90,7 @@ public class Jogador extends Personagem{
 		this.setVida(this.getVida() + v);
 		
 	}
-
+	
 	@Override
 	public void perdeVida() {
 		this.setVida(this.getVida() - 1);
@@ -122,6 +122,8 @@ public class Jogador extends Personagem{
 		return at;
 		
 	}
+
+
 	
 
 }

@@ -1,6 +1,7 @@
 package connorsRedemption;
 
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.geom.AffineTransform;
 
 abstract public class Personagem {
@@ -20,7 +21,7 @@ abstract public class Personagem {
 		this.posX = 0.0;
 		this.posY = 0.0;
 		this.velocidade = 0.0;
-		this.vida = 0;
+		this.vida = 3;
 		this.sangue = 0;
 	}
 	
@@ -54,7 +55,7 @@ abstract public class Personagem {
 	
 	
 	public int getVida() {
-		return vida;
+		return this.vida;
 	}
 
 	public void setVida(int vida) {
@@ -62,11 +63,26 @@ abstract public class Personagem {
 	}
 
 	public float getSangue() {
-		return sangue;
+		return this.sangue;
 	}
 
 	public void setSangue(float sangue) {
 		this.sangue = sangue;
+	}
+	
+	public boolean colidiuInimigo(Personagem connor, Personagem inimigo) {
+
+		if (connor != null && inimigo != null) {
+			Rectangle r1 = new Rectangle((int) connor.getPosX(), (int) connor.getPosY(), 16, 16);
+			Rectangle r2 = new Rectangle((int) inimigo.getPosX(), (int) inimigo.getPosY(), 16, 16);
+			if (r1.intersects(r2)) {
+
+				return true;
+				
+			}
+		}
+		return false;
+
 	}
 	
 	abstract public void andarCima();
@@ -90,5 +106,6 @@ abstract public class Personagem {
 	abstract public AffineTransform getRotacao();
 	
 	abstract public Image getImagem();
+
 	
 }
