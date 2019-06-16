@@ -26,6 +26,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	private Item frenteCoracaoHud1;
 	private Item frenteCoracaoHud2;
 	private Item frenteCoracaoHud3;
+	private Fase fase1;
 
 	public ConnorsRedemption() {
 		this.getJanelaPrincipal().addKeyListener(this);
@@ -41,6 +42,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.frenteCoracaoHud1 = null;
 		this.frenteCoracaoHud2 = null;
 		this.frenteCoracaoHud3 = null;
+		this.fase1 = null;
 
 	}
 
@@ -48,7 +50,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.imagens = new CarregaImagem();
 		this.connor = new Jogador("Connor", imagens.getImgConnor(), imagens.getImgTiro());
 		this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
-		// this.fase1 = new Fase(imagens.getImgMapa());
+		 this.fase1 = new Fase(imagens.getImgMapa());
 		// this.som = new CarregaSom();
 		// som.loop();
 
@@ -92,7 +94,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, this.getWidth(), this.getHeight());
 
-		// g.drawImage(this.fase1.getSubFaseImg(), this.fase1.getRotacao(), null);
+		g.drawImage(this.fase1.getSubFaseImg(), this.fase1.getRotacao(), null);
 		g.drawImage(this.connor.getImagem(), this.connor.getRotacao(), null);
 		if (this.bala != null) {
 			g.drawImage(this.bala.getImgBala(), this.bala.getRotacao(), null);
