@@ -1,12 +1,12 @@
 package connorsRedemption;
 
 import java.awt.Image;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.JLabel;
 
 public class CarregaImagem {
 	private Image[] connor;
@@ -20,6 +20,9 @@ public class CarregaImagem {
 	private Image baseHud;
 	private Image baseCoracao;
 	private Image frenteCoracao;
+	private Image arma1;
+	private Image arma2;
+	private Image caixaItemTopDir;
 
 	
 	
@@ -31,12 +34,35 @@ public class CarregaImagem {
 		this.mapa = mapaImage();
 		this.inimigos = inimigoImage();
 		
+		this.baseHud = baseHud();
 		this.CoracaoVida = coracaoVida();
 		this.baseCoracao = baseCoracao();
-		this.baseHud = baseHud();
 		this.frenteCoracao = frenteCoracao();
+		this.arma1 = arma1();
+		this.arma2 = arma2();
+		this.caixaItemTopDir = caixaItemTopDir();
+		
 	
 
+	}
+	
+	
+	private Image baseHud() {
+
+		File arquivo = new File("res\\imagens\\baseHud.png");
+
+		try {
+			BufferedImage imagem = ImageIO.read(arquivo);
+			this.baseHud = imagem.getScaledInstance(40,800, 1);
+
+			return baseHud;
+		} catch (IOException e) {
+			throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
+		}
+	}
+	
+	public Image getBaseHud() {
+		return this.baseHud;
 	}
 	
 	private Image[] connorImage() {
@@ -149,14 +175,16 @@ public class CarregaImagem {
 
 		try {
 			BufferedImage imagem = ImageIO.read(arquivo);
-			this.CoracaoVida = imagem.getScaledInstance(15, 50, 2);
+			this.CoracaoVida = imagem.getScaledInstance(15, 25, 2);
 
 			return CoracaoVida;
 		} catch (IOException e) {
 			throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
 		}
 	}
-
+	
+	
+	
 	
 	public Image getImgCoracao() {
 		return this.CoracaoVida;
@@ -198,32 +226,68 @@ public class CarregaImagem {
 		}
 	}
 	
-	public Image getfrenteCoracao() {
+	public Image getFrenteCoracao() {
 		return this.frenteCoracao;
 	}
 	
 	
-	
-	private Image baseHud() {
+	private Image arma1() {
 
-		File arquivo = new File("res\\imagens\\baseHud.png");
+		File arquivo = new File("res\\imagens\\arma1.png");
 
 		try {
 			BufferedImage imagem = ImageIO.read(arquivo);
-			this.baseHud = imagem.getScaledInstance(40,800, 1);
-
-			return baseHud;
+			this.arma1 = imagem.getScaledInstance(30,10, 1);
+			
+			return arma1;
 		} catch (IOException e) {
 			throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
 		}
 	}
 	
-	public Image getBaseHud() {
-		return this.baseHud;
+	public Image getArma1() {
+		return this.arma1;
 	}
 	
 	
+	private Image arma2() {
 
+		File arquivo = new File("res\\imagens\\arma2.png");
 
+		try {
+			BufferedImage imagem = ImageIO.read(arquivo);
+			this.arma2 = imagem.getScaledInstance(30,15, 1);
+
+			return arma2;
+		} catch (IOException e) {
+			throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
+		}
+	}
+	
+	public Image getArma2() {
+		return this.arma2;
+	}
+	
+	
+	
+	
+	private Image caixaItemTopDir() {
+
+		File arquivo = new File("res\\imagens\\caixaItemTopDir.png");
+
+		try {
+			BufferedImage imagem = ImageIO.read(arquivo);
+			this.caixaItemTopDir = imagem.getScaledInstance(40,40, 1);
+
+			return caixaItemTopDir;
+		} catch (IOException e) {
+			throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
+		}
+	}
+	
+	public Image getcaixaItemTopDir() {
+		return this.caixaItemTopDir;
+	}
+	
 	
 }

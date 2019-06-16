@@ -56,6 +56,17 @@ public class Item {
 		at.rotate(Math.toRadians(this.rotItem));
 		return at;
 	}
+/*	
+	public AffineTransform setRotacao(double rotacao) {
+		AffineTransform at = AffineTransform.getRotateInstance(this.getPosX(), this.getPosY());
+		at.rotate(Math.toRadians(rotacao));
+		
+		
+		at.rotate(45, 3 + 60/2, 3 + 15/2);
+		return at;
+	}
+*/	
+
 	
 	public void trasladar(double posX, double posY) {
         this.posX = posX;
@@ -68,6 +79,21 @@ public class Item {
 		if (coracao != null) {
 			Rectangle r1 = new Rectangle((int) connor.getPosX(), (int) connor.getPosY(), 20, 20);
 			Rectangle r2 = new Rectangle((int) coracao.getPosX(), (int) coracao.getPosY(), 30, 50);
+			if (r1.intersects(r2)) {
+				return true;
+				
+			}
+		}
+		return false;
+
+	}
+	
+	
+	public boolean colidiuCaixa(Item caixa, Bala bala) {
+
+		if (caixa != null && bala != null) {
+			Rectangle r1 = new Rectangle((int) caixa.getPosX(), (int) caixa.getPosY(), 45, 45);
+			Rectangle r2 = new Rectangle((int) bala.getPosXbala(), (int) bala.getPosYbala(), 25, 25);
 			if (r1.intersects(r2)) {
 				return true;
 				

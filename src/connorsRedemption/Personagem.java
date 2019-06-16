@@ -82,6 +82,18 @@ abstract public class Personagem {
 			}
 		}
 		return false;
+	}
+	
+	public boolean colidiuArma(Item arma, Personagem connor) {
+
+		if (arma != null && connor != null) {
+			Rectangle r1 = new Rectangle((int) connor.getPosX(), (int) connor.getPosY(), 20, 20);
+			Rectangle r2 = new Rectangle((int) arma.getPosX(), (int) arma.getPosY(), 65, 20);
+			if (r1.intersects(r2)) {
+				return true;
+			}
+		}
+		return false;
 
 	}
 	
