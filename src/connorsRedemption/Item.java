@@ -67,7 +67,7 @@ public class Item {
 
 		if (coracao != null) {
 			Rectangle r1 = new Rectangle((int) connor.getPosX(), (int) connor.getPosY(), 20, 20);
-			Rectangle r2 = new Rectangle((int) coracao.getPosX(), (int) coracao.getPosY(), 55, 55);
+			Rectangle r2 = new Rectangle((int) coracao.getPosX(), (int) coracao.getPosY(), 30, 50);
 			if (r1.intersects(r2)) {
 				return true;
 				

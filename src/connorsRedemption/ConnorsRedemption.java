@@ -2,8 +2,14 @@ package connorsRedemption;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.net.URL;
+
+import javax.swing.GrayFilter;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class ConnorsRedemption extends Game implements KeyListener {
 	
@@ -14,6 +20,13 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	//private Fase fase1;
 	//private CarregaSom som;
 	private Vida coracao;
+	//private Item HUDbaseCoracao;
+	private Item baseHudEsq;
+	private Item baseHudDir;
+	private Item frenteCoracaoHud1;
+	private Item frenteCoracaoHud2;
+	private Item frenteCoracaoHud3;
+	
 	
 	public ConnorsRedemption() {
 		this.getJanelaPrincipal().addKeyListener(this);
@@ -21,7 +34,16 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.bala = null;
 		this.inimigo = null;
 		//this.fase1 = null;
+		
 		this.coracao = null;
+		//this.HUDbaseCoracao = null;
+		this.baseHudEsq = null;
+		this.baseHudDir = null;
+		this.frenteCoracaoHud1 = null;
+		this.frenteCoracaoHud2  = null;
+		this.frenteCoracaoHud3 = null;
+		
+		
 	}
 	
 	public void onCarregar() {
@@ -31,7 +53,17 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		//this.fase1 = new Fase(imagens.getImgMapa());
 		//this.som = new CarregaSom();
 		//som.loop();
+		
 		this.coracao = new Vida("coracao", imagens.getImgCoracao(), 0,0);
+		this.baseHudEsq = new Item("baseHudEsq", imagens.getBaseHud(), 0,0);
+		this.baseHudDir = new Item("baseHudDir", imagens.getBaseHud(), 0,0);
+		this.frenteCoracaoHud1 = new Item("frenteCoracaoHud1", imagens.getfrenteCoracao(), 0, 0);
+		this.frenteCoracaoHud2 = new Item("frenteCoracaoHud2", imagens.getfrenteCoracao(), 0, 0);
+		this.frenteCoracaoHud3 = new Item("frenteCoracaoHud3", imagens.getfrenteCoracao(), 0, 0);
+		
+		
+		
+		
 		this.onStart();
 	}
 	
@@ -44,15 +76,24 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	public void onStart() {
     	
 		this.coracao.trasladar(Math.random()*(getHeight()-150), Math.random()*(getWidth()-50));
-	
+        
+        this.baseHudEsq.trasladar(0,0);
+        this.baseHudDir.trasladar(getWidth()-40,0);
+        
+        this.frenteCoracaoHud1.trasladar(getWidth()-760, getHeight()-550);
+        this.frenteCoracaoHud2.trasladar(getWidth()-760, getHeight()-530);
+        this.frenteCoracaoHud3.trasladar(getWidth()-760, getHeight()-510);
+       
 		
 	}
 	
 	public void onAtualizar() {
 		
 		colisaoConnorBalaTela();
-		ativaCoracao();
+		ativaCoracaoVida();
 		connorPerdeVida();
+		
+		
 	}
 	
 	
@@ -70,6 +111,9 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		g.drawImage(this.inimigo.getImagem(), this.inimigo.getRotacao(), null);
 		g.drawImage(this.coracao.getImgItem(), this.coracao.getRotacao(), null);
 		
+		desenhaHud(g);
+
+
 		
 	}
 	
@@ -102,7 +146,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	}
 	
 	public void keyReleased(KeyEvent e) {
-		
+
 	}
 	
 	
@@ -112,6 +156,86 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	
 	
 	// funcoes separadas da logica de cada objeto para manter organizado
+	
+	public void ativaCoracaoVida() {
+
+		if (coracao.colidiuCoracao(coracao, connor)) {
+			double randowA = Math.random() * (getHeight() - 150);
+			double randowL = Math.random() * (getWidth() - 50);
+			// this.coracao = new Vida("coracao", imagens.getImgCoracao(), randowL,randowA);
+			this.coracao.trasladar(randowL, randowA);
+			if (connor.getVida() <= 2) {
+				
+				if (connor.getVida() == 2) {
+					this.frenteCoracaoHud1 = new Item("coracaoBase1", imagens.getfrenteCoracao(), 
+							getWidth() - 760, getHeight() - 550);
+				}
+				
+				if (connor.getVida() == 1) {
+					this.frenteCoracaoHud2 = new Item("coracaoBase2", imagens.getfrenteCoracao(), 
+							getWidth() - 760,getHeight() - 530);
+				}
+				
+				if (connor.getVida() == 0) {
+					this.frenteCoracaoHud3 = new Item("coracaoBase3", imagens.getfrenteCoracao(), 
+							getWidth() - 760, getHeight() - 510);
+
+				}
+				connor.ganhaVida(1);
+			}
+			System.out.println(connor.getVida());
+			
+
+		   
+		}
+		
+
+	}
+	
+	public void connorPerdeVida() {
+		
+		if (connor.colidiuInimigo(inimigo, connor)) {
+			
+			if (connor.getVida() == 3) {
+				this.frenteCoracaoHud1 = new Item("coracaoBase1", imagens.getBaseCoracao(), 
+						getWidth() - 760,getHeight() - 550);
+			}
+			
+			if (connor.getVida() == 2) {
+				this.frenteCoracaoHud2 = new Item("coracaoBase2", imagens.getBaseCoracao(),
+						getWidth() - 760, getHeight() - 530);
+			}
+			
+			if (connor.getVida() == 1) {
+				this.frenteCoracaoHud3 = new Item("coracaoBase3", imagens.getBaseCoracao(), 
+						getWidth() - 760, getHeight() - 510);
+
+			}
+			connor.perdeVida();
+			System.out.println("perdeu vida "+connor.getVida());
+			this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
+			
+			if(connor.getVida()<=0) {
+				System.out.println("VOCE PERDEU!!!!      "
+						+ "<<<Não consegu acessar o metodo finalizar() ou a variavel jogoAtivo>>");
+			}
+
+		}
+		
+	}
+	
+	public void desenhaHud(Graphics2D g) {
+		
+		g.drawImage(this.baseHudDir.getImgItem(), this.baseHudDir.getRotacao(), null);
+		g.drawImage(this.baseHudEsq.getImgItem(), this.baseHudEsq.getRotacao(), null);
+		
+		g.drawImage(this.frenteCoracaoHud1.getImgItem(), this.frenteCoracaoHud1.getRotacao(), null);
+		g.drawImage(this.frenteCoracaoHud2.getImgItem(), this.frenteCoracaoHud2.getRotacao(), null);
+		g.drawImage(this.frenteCoracaoHud3.getImgItem(), this.frenteCoracaoHud3.getRotacao(), null);
+	}
+	
+	
+	
 	
 	public void colisaoConnorBalaTela() {
 		this.inimigo.setCont(this.inimigo.getCont() + 1);
@@ -147,38 +271,5 @@ public class ConnorsRedemption extends Game implements KeyListener {
 			}
 		}
 	}
-	
-	
-	
-	
-	
-	public void ativaCoracao() {
-
-		if (coracao.colidiuCoracao(coracao, connor)) {
-			double randowA = Math.random() * (getHeight() - 150);
-			double randowL = Math.random() * (getWidth() - 50);
-			// this.coracao = new Vida("coracao", imagens.getImgCoracao(), randowL,randowA);
-			this.coracao.trasladar(randowL, randowA);
-			connor.ganhaVida(1);
-			System.out.println(connor.getVida());
-			
-
-		   
-		}
-		
-
-	}
-	
-	public void connorPerdeVida() {
-		
-		if (connor.colidiuInimigo(inimigo, connor)) {
-			connor.perdeVida();
-			System.out.println("perdeu vida "+connor.getVida());
-			this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
-		
-		}
-		
-	}
-	
 
 }

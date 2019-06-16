@@ -1,6 +1,7 @@
 package connorsRedemption;
 
 import java.applet.AudioClip;
+import java.awt.Image;
 import java.awt.geom.AffineTransform;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -8,8 +9,8 @@ import javax.swing.JLabel;
 public class Arma {
 
 	private String nome;
-	private ImageIcon imagemArma;
-	private JLabel arma = new JLabel(imagemArma);
+	private Image imagemArma;
+
 	private AudioClip audio;
 	// private double qtdDano; // a classe Bala passou a contror isso.
 	private int posArmX;
@@ -28,12 +29,8 @@ public class Arma {
 
 	}
 
-	public void setImagem(String CaminhoImg, int posX, int posY, int larguraImg, int alturaImg) {
-		this.imagemArma = new ImageIcon(getClass().getResource(CaminhoImg));
-		arma.setBounds(this.posArmX = posX, this.posArmY = posY, larguraImg, alturaImg);
-	}
 
-	public ImageIcon getImage() {
+	public Image getImage() {
 		return this.imagemArma;
 
 	}
@@ -102,8 +99,9 @@ public class Arma {
 	}
 
 	public void atirar2(boolean gatilho) {
+		/*
 		if (gatilho && getQtdMunicao() > 0) {
-			Bala bala = new Bala(null, 10); // imagem(por hora nula) e qtd dano da bala
+			//Bala bala = new Bala(skinBala, 0, 0, 0, 0, 0); // imagem(por hora nula) e qtd dano da bala
 		
 			System.out.println("DEBUG : ATIROU");
 		
@@ -111,7 +109,7 @@ public class Arma {
 			bala.setPosicaoInicialBala(getPosArmX(), getPosArmY());
 		
 
-			bala.setVelocidadeBalaX(0.1f); // ajudar posteriormente velocidade
+			//bala.setVelocidadeBalaX(0.1f); // ajudar posteriormente velocidade
 			this.qtdMunicao--;
 
 			if (bala.getPosXbala() < Tela.auxLargura || bala.getPosYbala() < Tela.auxAltura) {
@@ -121,6 +119,7 @@ public class Arma {
 
 			
 		}
+*/		
 	}
 
 	public void carregarArma() {
@@ -151,71 +150,4 @@ public class Arma {
 		return at;
 	}
 	
-	
-
-	// APENAS PARA DEBUGAR, DEPOIS SERA DELETADO.
-    public static void main(String args[]) {
-
-		System.out.println("logica arma 1");
-		logicaArma1(); // testando opcao metodo da bala atirar1()
-		System.out.println("\n\n");
-		System.out.println("logica arma 2");
-		logicaArma2(); // testando opcao metodo da bala atirar2()
-
-	}
-
-	// funcoes
-
-	public static void logicaArma1() {
-
-		Arma metralhadora = new Arma("Arma1.png", 30, 4); 
-
-		System.out.println(metralhadora.getQtdMunicao());
-
-		System.out.println("Vou atirar!");
-		System.out.println("Quantidade de Cartucho: " + metralhadora.getQtdCartucho());
-
-		while (true) {
-
-			metralhadora.atirar1();
-			if (metralhadora.getQtdCartucho() > 0) {
-				System.out.println("Tiro: " + metralhadora.getQtdMunicao());
-			} else {
-				break;
-			}
-			if (metralhadora.getQtdMunicao() <= 1) {
-				System.out.println("Tenho que recarregar");
-				metralhadora.carregarArma();
-				System.out.println("Quantidade de Cartucho: " + metralhadora.getQtdCartucho());
-			}
-		}
-		System.out.println();
-		System.out.println("Status quantidade de bala atual: " + metralhadora.getQtdMunicao());
-		System.out.println("Status quantidade de Cartucho atual: " + metralhadora.getQtdCartucho());
-
-	}
-
-	public static void logicaArma2() {
-		Arma metralhadora = new Arma("Arma1.png", 30, 4); // futuramente tambem pretendo entrar com o
-															// sprite
-
-		System.out.println(metralhadora.getPosArmX() + "  " + metralhadora.getPosArmY());
-		boolean atirar = true; // ao aperta uma tecla fica true;
-		while (true) { // representa "loop principal"
-			if (atirar) {
-				if (metralhadora.getQtdCartucho() == 0 && metralhadora.getQtdMunicao() == 0) {
-					atirar = false;
-					System.out.println("\nAcabou os cartuchos.");
-				}
-				metralhadora.atirar2(atirar);
-				if (metralhadora.getQtdMunicao() == 0) {
-					metralhadora.carregarArma();
-				}
-
-			}
-			// atirar = false; // ao soltar uma tecla para de atirar;
-
-		}
-	}
-
 }

@@ -13,11 +13,6 @@ public class MainTester {
 
 	// funcoes
 
-	public static void testaSangue() {
-
-		Sangue itemSangue = new Sangue("Sangue", null, (Integer) null, Tela.auxLargura / 2);
-		itemSangue.detectarColisao("Connors", 1.0f, 1.0f);
-	}
 
 	public static void logicaArma1() {
 

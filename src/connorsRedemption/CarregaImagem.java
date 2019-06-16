@@ -14,18 +14,28 @@ public class CarregaImagem {
 	private Image[] mapa;
 	private Image[] inimigos;
 	
-	private Image coracaoVida;
-	private Image imagemCoracaoMenor;
-	private int x;
-	private int y;
+	private Image CoracaoVida;
 	
+	// HUD
+	private Image baseHud;
+	private Image baseCoracao;
+	private Image frenteCoracao;
+
+	
+	
+
 	public CarregaImagem() {
+		
 		this.connor = connorImage();
 		this.tiro = tiroImage();
 		this.mapa = mapaImage();
 		this.inimigos = inimigoImage();
 		
-		this.coracaoVida = coracaoVida();
+		this.CoracaoVida = coracaoVida();
+		this.baseCoracao = baseCoracao();
+		this.baseHud = baseHud();
+		this.frenteCoracao = frenteCoracao();
+	
 
 	}
 	
@@ -134,36 +144,86 @@ public class CarregaImagem {
 	}
 	
 	private Image coracaoVida() {
-	//private Image[] coracao() {
+
 		File arquivo = new File("res\\imagens\\coracao.png");
-		//File arquivo = new File("res/imagens/Coracao1.png");
-		
-		
+
 		try {
-				BufferedImage  imagem = ImageIO.read(arquivo);
-				this.imagemCoracaoMenor = imagem.getScaledInstance(15,50,2);
-				//Image[] img = new Image[0];
-				//Image img = imagem.getSubimage(0,10,20,20);
-			
-				
-				
-				//Recorta a imagem e coloca no vetor
-				//img[0] = imagem.getSubimage(0,10,20,20);
-				//img[1] = imagem.getSubimage(0,120,20,20);
-				//img[2] = imagem.getSubimage(20,120,20,20);
-				//img[3] = imagem.getSubimage(40,120,20,20);
-				
-			   	return imagemCoracaoMenor;
-			} catch (IOException e) {
-				throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
-			}
+			BufferedImage imagem = ImageIO.read(arquivo);
+			this.CoracaoVida = imagem.getScaledInstance(15, 50, 2);
+
+			return CoracaoVida;
+		} catch (IOException e) {
+			throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
+		}
 	}
 
 	
 	public Image getImgCoracao() {
-		return this.coracaoVida;
+		return this.CoracaoVida;
 	}
 	
+	
+	
+	private Image baseCoracao() {
+
+		File arquivo = new File("res\\imagens\\HUDvisorCoracaoBase.png");
+
+		try {
+			BufferedImage imagem = ImageIO.read(arquivo);
+			this.baseCoracao = imagem.getScaledInstance(20, 20, 0);
+
+			return baseCoracao;
+		} catch (IOException e) {
+			throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
+		}
+	}
+	
+	public Image getBaseCoracao() {
+		return this.baseCoracao;
+	}
+	
+	
+	
+	private Image frenteCoracao() {
+
+		File arquivo = new File("res\\imagens\\HUDvisorCoracaoFrente.png");
+
+		try {
+			BufferedImage imagem = ImageIO.read(arquivo);
+			this.frenteCoracao = imagem.getScaledInstance(20,20, 1);
+
+			return frenteCoracao;
+		} catch (IOException e) {
+			throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
+		}
+	}
+	
+	public Image getfrenteCoracao() {
+		return this.frenteCoracao;
+	}
+	
+	
+	
+	private Image baseHud() {
+
+		File arquivo = new File("res\\imagens\\baseHud.png");
+
+		try {
+			BufferedImage imagem = ImageIO.read(arquivo);
+			this.baseHud = imagem.getScaledInstance(40,800, 1);
+
+			return baseHud;
+		} catch (IOException e) {
+			throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
+		}
+	}
+	
+	public Image getBaseHud() {
+		return this.baseHud;
+	}
+	
+	
+
 
 	
 }
