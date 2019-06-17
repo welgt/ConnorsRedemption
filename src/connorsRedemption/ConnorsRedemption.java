@@ -579,6 +579,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		}
 		if (this.inimigo.getCont() % 400 == 0) {
 
+			/*
 			if(this.caminho.size()>0) {
 				
 				if(this.inimigo.getAchou()) {
@@ -586,12 +587,9 @@ public class ConnorsRedemption extends Game implements KeyListener {
 					this.inimigo.setAchou(false);
 				}
 				
-				System.out.println("No inimigo: " + this.inimigo.getNoAtual().getID());
-				System.out.println("No auxiliar: " + this.noAux.getID());
 				
 				if(this.inimigo.getNoAtual().getID()/15 < this.noAux.getID() / 15 ) {
 					this.inimigo.andarBaixo();
-					System.out.println("entrou para baixo");
 					this.inimigo.setNoAtual(this.tileMap.getMap().getMap().get(this.inimigo.getNoAtual().getID()+27));
 					
 				} else if((this.inimigo.getNoAtual().getID()%26) - 1 < (this.noAux.getID() % 26) - 1 ) {
@@ -606,7 +604,8 @@ public class ConnorsRedemption extends Game implements KeyListener {
 				}
 
 			}
-			//this.inimigo.andarBaixo();
+			*/
+			this.inimigo.andarBaixo();
 			this.inimigo.setCont(0);
 		}
 
