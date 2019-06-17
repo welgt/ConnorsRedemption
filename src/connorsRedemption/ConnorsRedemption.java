@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ConnorsRedemption extends Game implements KeyListener {
 
@@ -13,6 +15,8 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	private Inimigo inimigo;
 	private Fase fase1;
 	private TileMap tileMap;
+	private List<Node> caminho;
+	private Node noAux;
 	// private CarregaSom som;
 	private Vida coracao;
 
@@ -69,6 +73,8 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.inimigo = null;
 		this.fase1 = null;
 		this.tileMap = null;
+		this.caminho = null;
+		this.noAux = null;
 
 		this.coracao = null;
 		this.arma1 = null;
@@ -117,7 +123,13 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.tileMap = new TileMap(15, 27);
 		// this.som = new CarregaSom();
 		// som.loop();
-
+		
+		this.caminho = new ArrayList<Node>();
+		this.caminho = AEstrela.aEstrela(tileMap.getMap().getMap().get(31), tileMap.getMap().getMap().get(368), tileMap.getMap());
+		this.inimigo.setNoAtual(this.caminho.remove(0));
+		this.inimigo.setAchou(false);
+		this.noAux = this.caminho.remove(0);
+		
 		this.baseHudEsq = new Item("baseHudEsq", imagens.getBaseHud(), 0, 0);
 		this.baseHudDir = new Item("baseHudDir", imagens.getBaseHud(), 0, 0);
 		this.baseHudEsq.trasladar(0, 0);
@@ -555,7 +567,35 @@ public class ConnorsRedemption extends Game implements KeyListener {
 			this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
 		}
 		if (this.inimigo.getCont() % 400 == 0) {
-			//this.inimigo.andarEsquerda();
+
+			if(this.caminho.size()>0) {
+				
+				if(this.inimigo.getAchou()) {
+					this.noAux = this.caminho.remove(0);
+					this.inimigo.setAchou(false);
+				}
+				
+				System.out.println("No inimigo: " + this.inimigo.getNoAtual().getID());
+				System.out.println("No auxiliar: " + this.noAux.getID());
+				
+				if(this.inimigo.getNoAtual().getID()/15 < this.noAux.getID() / 15 ) {
+					this.inimigo.andarBaixo();
+					System.out.println("entrou para baixo");
+					this.inimigo.setNoAtual(this.tileMap.getMap().getMap().get(this.inimigo.getNoAtual().getID()+27));
+					
+				} else if((this.inimigo.getNoAtual().getID()%26) - 1 < (this.noAux.getID() % 26) - 1 ) {
+					this.inimigo.andarDireita();
+					this.inimigo.setNoAtual(this.tileMap.getMap().getMap().get(this.noAux.getID()+1));
+					
+				}
+				
+				if(this.noAux.getID() == this.inimigo.getNoAtual().getID()) {
+					this.inimigo.setNoAtual(this.noAux);
+					this.inimigo.setAchou(true);
+				}
+
+			}
+			//this.inimigo.andarBaixo();
 			this.inimigo.setCont(0);
 		}
 
