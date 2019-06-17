@@ -38,28 +38,38 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	private Item explosaoCaveira1;
 	private Item explosaoCaveira2;
 	private Item explosaoCaveira3;
+	
+	private double minX = getWidth()  - 700;
+	private double maxX = getWidth()  - 100; 
+	
+	private double minY = getHeight() - 500;
+	private double maxY = getHeight() - 150;
+	
+	
+	
+	// Math.floor(Math.random() * (max - min + 1)) + min;
+    // REFERENCIA LINHA ACIMA :http://www.devfuria.com.br/javascript/gerar-numero-randomico-entre-2-numeros-quaisquer/
+	private double posXcaixaCaveira1 = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+	private double posYcaixaCaveira1 = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+	private double posXcaixaCaveira2 = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+	private double posYcaixaCaveira2 = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+	private double posXcaixaCaveira3 = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+	private double posYcaixaCaveira3 = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
 
-	private double posXcaixaCaveira1 = Math.random() * (getWidth() - 100);
-	private double posYcaixaCaveira1 = Math.random() * (getHeight() - 250);
-	private double posXcaixaCaveira2 = Math.random() * (getWidth() - 100);
-	private double posYcaixaCaveira2 = Math.random() * (getHeight() - 250);
-	private double posXcaixaCaveira3 = Math.random() * (getWidth() - 100);
-	private double posYcaixaCaveira3 = Math.random() * (getHeight() - 250);
-
-	private double posXcaixaItem1 = Math.random() * (getWidth() - 100);
-	private double posYcaixaItem1 = Math.random() * (getHeight() - 250);
-	private double posXcaixaItem2 = Math.random() * (getWidth() - 100);
-	private double posYcaixaItem2 = Math.random() * (getHeight() - 250);
-	private double posXcaixaItem3 = Math.random() * (getWidth() - 100);
-	private double posYcaixaItem3 = Math.random() * (getHeight() - 250);
+	private double posXcaixaItem1 = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+	private double posYcaixaItem1 = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+	private double posXcaixaItem2 = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+	private double posYcaixaItem2 = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+	private double posXcaixaItem3 = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+	private double posYcaixaItem3 = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
 
 	private boolean caixaItemDestruida1; // tentei usar a mesma boleana pra todas cxs mas deu muito b.o
 	private boolean caixaItemDestruida2;
 	private boolean caixaItemDestruida3;
 
-	private boolean caixaICaveiraDestruida1; // tentei usar a mesma boleana pra todas cxs mas deu muito b.o
-	private boolean caixaICaveiraDestruida2;
-	private boolean caixaICaveiraDestruida3;
+	//private boolean caixaICaveiraDestruida1; // tentei usar a mesma boleana pra todas cxs mas deu muito b.o
+	//private boolean caixaICaveiraDestruida2;
+	//private boolean caixaICaveiraDestruida3;
 
 	public ConnorsRedemption() {
 		this.getJanelaPrincipal().addKeyListener(this);
@@ -94,9 +104,9 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.caixaItemDestruida2 = false;
 		this.caixaItemDestruida3 = false;
 
-		this.caixaICaveiraDestruida1 = false;
-		this.caixaICaveiraDestruida2 = false;
-		this.caixaICaveiraDestruida3 = false;
+		//this.caixaICaveiraDestruida1 = false;
+		//this.caixaICaveiraDestruida2 = false;
+		//this.caixaICaveiraDestruida3 = false;
 
 		this.explosaoCaveira1 = null;
 		this.explosaoCaveira2 = null;
@@ -108,6 +118,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 
 	// toda logica que nao deve ser atualizada.
 	public void onCarregar() {
+		
 		this.imagens = new CarregaImagem();
 		this.connor = new Jogador("Connor", imagens.getImgConnor(), imagens.getImgTiro());
 		this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
