@@ -89,6 +89,23 @@ public class Item {
 	}
 	
 	
+	
+	public boolean colidiuCaixaCaveira(Item caixa, Personagem connor) {
+
+		if (caixa != null) {
+			Rectangle r1 = new Rectangle((int) connor.getPosX(), (int) connor.getPosY(), 20, 20);
+			Rectangle r2 = new Rectangle((int) caixa.getPosX(), (int) caixa.getPosY(), 30, 50);
+			if (r1.intersects(r2)) {
+				return true;
+				
+			}
+		}
+		return false;
+
+	}
+	
+	
+	
 	public boolean colidiuCaixa(Item caixa, Bala bala) {
 
 		if (caixa != null && bala != null) {
@@ -100,7 +117,6 @@ public class Item {
 			}
 		}
 		return false;
-
 	}
 
 

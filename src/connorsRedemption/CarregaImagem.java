@@ -22,6 +22,8 @@ public class CarregaImagem {
 	private Image arma1;
 	private Image arma2;
 	private Image [] caixaItem;
+	private Image [] caixaCaveira;
+	private Image [] explosaoCaixaCaveira;
 
 
 	public CarregaImagem() {
@@ -38,7 +40,8 @@ public class CarregaImagem {
 		this.arma1 = arma1();
 		this.arma2 = arma2();
 		this.caixaItem = caixaItem();
-		
+		this.caixaCaveira  = caixaCaveira();
+		this.explosaoCaixaCaveira = explosaoCaixaCaveira();
 		
 	
 
@@ -315,4 +318,88 @@ public class CarregaImagem {
 	}
 	
 	
+
+	
+	private Image[] caixaCaveira() {
+
+		File arquivo0 = new File("res\\imagens\\caixaCaveiraTopDir.png");
+		File arquivo1 = new File("res\\imagens\\caixaCaveiraTopEsq.png");
+		File arquivo2 = new File("res\\imagens\\caixaItemBaixoDir.png");
+		File arquivo3 = new File("res\\imagens\\caixaItemBaixoEsq.png");
+
+		try {
+			BufferedImage imagem0 = ImageIO.read(arquivo0);
+			BufferedImage imagem1 = ImageIO.read(arquivo1);
+			BufferedImage imagem2 = ImageIO.read(arquivo2);
+			BufferedImage imagem3 = ImageIO.read(arquivo3);
+
+			Image[] img = new Image[4];
+
+			img[0] = imagem0.getScaledInstance(20, 20, 1);
+			img[1] = imagem1.getScaledInstance(20, 20, 1);
+			img[2] = imagem2.getScaledInstance(20, 20, 1);
+			img[3] = imagem3.getScaledInstance(20, 20, 1);
+
+			return img;
+		} catch (IOException e) {
+			throw new IllegalArgumentException(
+					"Nao foi possivel carregar o arquivo " + arquivo0 + "ou" + arquivo1 + "ou" + arquivo2 + arquivo3,
+					e);
+		}
+	}
+
+	public Image getcaixaCaveiraTopDir() {
+		return this.caixaCaveira[0];
+	}
+
+	public Image getcaixaCaveiraTopEsq() {
+		return this.caixaCaveira[1];
+	}
+
+	public Image getcaixaBaixoDir() {
+		return this.caixaCaveira[2];
+	}
+
+	public Image getcaixaCaveiraBaixoDir() {
+		return this.caixaCaveira[3];
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	private Image[] explosaoCaixaCaveira() {
+
+		File arquivo0 = new File("res\\imagens\\explosaoCaveira1.png");
+		File arquivo1 = new File("res\\imagens\\explosaoCaveira2.png");
+
+		try {
+			BufferedImage imagem0 = ImageIO.read(arquivo0);
+			BufferedImage imagem1 = ImageIO.read(arquivo1);
+
+			Image[] img = new Image[2];
+
+			img[0] = imagem0.getScaledInstance(40, 40, 1);
+			img[1] = imagem1.getScaledInstance(60, 60, 1);
+
+			return img;
+		} catch (IOException e) {
+			throw new IllegalArgumentException(
+					"Nao foi possivel carregar o arquivo " + arquivo0 + "ou" + arquivo1,
+					e);
+		}
+	}
+
+	public Image getExplosaoCaixaCaveira1() {
+		return this.explosaoCaixaCaveira[0];
+	}
+
+	public Image getExplosaoCaixaCaveira2() {
+		return this.explosaoCaixaCaveira[1];
+	}
+
 }

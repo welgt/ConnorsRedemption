@@ -12,7 +12,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	private Bala bala;
 	private Inimigo inimigo;
 	private Fase fase1;
-	//private CarregaSom som;
+	// private CarregaSom som;
 	private Vida coracao;
 
 	private Item arma1;
@@ -21,6 +21,10 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	private Item caixaItem1;
 	private Item caixaItem2;
 	private Item caixaItem3;
+
+	private Item caixaCaveira1;
+	private Item caixaCaveira2;
+	private Item caixaCaveira3;
 
 	// HUD
 	private Item baseHudEsq;
@@ -31,17 +35,31 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	private Item armaHud1;
 	private Item armaHud2;
 
-	private double posXcaixaItem1 = Math.random() * (getWidth() - 50);
-	private double posYcaixaItem1 = Math.random() * (getHeight() - 150);
-	private double posXcaixaItem2 = Math.random() * (getWidth() - 50);
-	private double posYcaixaItem2 = Math.random() * (getHeight() - 150);
-	private double posXcaixaItem3 = Math.random() * (getWidth() - 50);
-	private double posYcaixaItem3 = Math.random() * (getHeight() - 150);
+	private Item explosaoCaveira1;
+	private Item explosaoCaveira2;
+	private Item explosaoCaveira3;
 
-	private boolean caixaDestruida1; // tentei usar a mesma boleana pra todas cxs mas deu muito b.o
-	private boolean caixaDestruida2;
-	private boolean caixaDestruida3;
+	private double posXcaixaCaveira1 = Math.random() * (getWidth() - 100);
+	private double posYcaixaCaveira1 = Math.random() * (getHeight() - 250);
+	private double posXcaixaCaveira2 = Math.random() * (getWidth() - 100);
+	private double posYcaixaCaveira2 = Math.random() * (getHeight() - 250);
+	private double posXcaixaCaveira3 = Math.random() * (getWidth() - 100);
+	private double posYcaixaCaveira3 = Math.random() * (getHeight() - 250);
 
+	private double posXcaixaItem1 = Math.random() * (getWidth() - 100);
+	private double posYcaixaItem1 = Math.random() * (getHeight() - 250);
+	private double posXcaixaItem2 = Math.random() * (getWidth() - 100);
+	private double posYcaixaItem2 = Math.random() * (getHeight() - 250);
+	private double posXcaixaItem3 = Math.random() * (getWidth() - 100);
+	private double posYcaixaItem3 = Math.random() * (getHeight() - 250);
+
+	private boolean caixaItemDestruida1; // tentei usar a mesma boleana pra todas cxs mas deu muito b.o
+	private boolean caixaItemDestruida2;
+	private boolean caixaItemDestruida3;
+
+	private boolean caixaICaveiraDestruida1; // tentei usar a mesma boleana pra todas cxs mas deu muito b.o
+	private boolean caixaICaveiraDestruida2;
+	private boolean caixaICaveiraDestruida3;
 
 	public ConnorsRedemption() {
 		this.getJanelaPrincipal().addKeyListener(this);
@@ -68,9 +86,21 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.caixaItem2 = null;
 		this.caixaItem3 = null;
 
-		this.caixaDestruida1 = false;
-		this.caixaDestruida2 = false;
-		this.caixaDestruida3 = false;
+		this.caixaCaveira1 = null;
+		this.caixaCaveira2 = null;
+		this.caixaCaveira3 = null;
+
+		this.caixaItemDestruida1 = false;
+		this.caixaItemDestruida2 = false;
+		this.caixaItemDestruida3 = false;
+
+		this.caixaICaveiraDestruida1 = false;
+		this.caixaICaveiraDestruida2 = false;
+		this.caixaICaveiraDestruida3 = false;
+
+		this.explosaoCaveira1 = null;
+		this.explosaoCaveira2 = null;
+		this.explosaoCaveira3 = null;
 
 		this.fase1 = null;
 
@@ -82,8 +112,8 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.connor = new Jogador("Connor", imagens.getImgConnor(), imagens.getImgTiro());
 		this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
 		this.fase1 = new Fase(imagens.getImgMapa());
-		//this.som = new CarregaSom();
-		//som.loop();
+		// this.som = new CarregaSom();
+		// som.loop();
 
 		this.baseHudEsq = new Item("baseHudEsq", imagens.getBaseHud(), 0, 0);
 		this.baseHudDir = new Item("baseHudDir", imagens.getBaseHud(), 0, 0);
@@ -108,7 +138,12 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.arma1.trasladar(this.posXcaixaItem2, this.posYcaixaItem2);
 		this.arma2.trasladar(this.posXcaixaItem3, this.posYcaixaItem3);
 
-        carregaImgCuboQuadranteCorreto();
+		this.explosaoCaveira1 = new Item("exp1", null, 0, 0);
+		this.explosaoCaveira2 = new Item("exp2", null, 0, 0);
+		this.explosaoCaveira3 = new Item("exp3", null, 0, 0);
+
+		carregaImgCxItemQuadranteCorreto();
+		carregaImgCxCaveiraQuadranteCorreto();
 
 	}
 
@@ -124,6 +159,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		connorPerdeVida();
 		colisaoConnorArma();
 		colisaoBalaCaixaItem();
+		colisaoConnorCaixaCaveira();
 
 	}
 
@@ -150,6 +186,13 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		g.drawImage(this.caixaItem2.getImgItem(), this.caixaItem2.getRotacao(), null);
 		g.drawImage(this.caixaItem3.getImgItem(), this.caixaItem3.getRotacao(), null);
 
+		g.drawImage(this.caixaCaveira1.getImgItem(), this.caixaCaveira1.getRotacao(), null);
+		g.drawImage(this.caixaCaveira2.getImgItem(), this.caixaCaveira2.getRotacao(), null);
+		g.drawImage(this.caixaCaveira3.getImgItem(), this.caixaCaveira3.getRotacao(), null);
+
+		g.drawImage(this.explosaoCaveira1.getImgItem(), this.explosaoCaveira1.getRotacao(), null);
+		g.drawImage(this.explosaoCaveira2.getImgItem(), this.explosaoCaveira2.getRotacao(), null);
+		g.drawImage(this.explosaoCaveira3.getImgItem(), this.explosaoCaveira3.getRotacao(), null);
 	}
 
 	public void keyTyped(KeyEvent e) {
@@ -185,75 +228,10 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	}
 
 	// funcoes separadas da logica de cada objeto para manter organizado
-	
-	public void carregaImgCuboQuadranteCorreto() {
-		
-		// top dir
-		if (this.posXcaixaItem1 >= (400) && posYcaixaItem1 <= 300) {
-			this.caixaItem1 = new Item("caixaItem1", imagens.getcaixaItemTopDir(), 0, 0);
-		
-		}
-		
-		if (this.posXcaixaItem2 >= (400) && posYcaixaItem1 <= 300) {
-			this.caixaItem2 = new Item("caixaItem1", imagens.getcaixaItemTopDir(), 0, 0);
-		}
-		
-		if (this.posXcaixaItem3 >= (400) && posYcaixaItem1 <= 300) {
-			this.caixaItem3 = new Item("caixaItem1", imagens.getcaixaItemTopDir(), 0, 0);
-		
-		}
-		
-		// top esq
-		if (this.posXcaixaItem1 <= (400) && posYcaixaItem1 <= 300) {
-			this.caixaItem1 = new Item("caixaItem1", imagens.getcaixaItemTopEsq(), 0, 0);
-		
-		}
-		
-		if (this.posXcaixaItem2 <= (400) && posYcaixaItem1 <= 300) {
-			this.caixaItem2 = new Item("caixaItem1", imagens.getcaixaItemTopEsq(), 0, 0);
-		}
-		
-		if (this.posXcaixaItem3 <= (400) && posYcaixaItem1 <= 300) {
-			this.caixaItem3 = new Item("caixaItem1", imagens.getcaixaItemTopEsq(), 0, 0);
-		
-		}
-		
-		// baixo dir
-		if (this.posXcaixaItem1 >= (400) && posYcaixaItem1 >= 300) {
-			this.caixaItem1 = new Item("caixaItem1", imagens.getcaixaItemTopDir(), 0, 0); //getcaixaItemBaixoDir
-		}
-		
-		if (this.posXcaixaItem2 >= (400) && posYcaixaItem1 >= 300) {
-			this.caixaItem2 = new Item("caixaItem1", imagens.getcaixaItemTopDir(), 0, 0); //getcaixaItemBaixoDir
-		}
-		
-		if (this.posXcaixaItem3 >= (400) && posYcaixaItem1 >= 300) {
-			this.caixaItem3 = new Item("caixaItem1", imagens.getcaixaItemTopDir(), 0, 0); //getcaixaItemBaixoDir
-		}
-		
-		// baixo esq
-		if (this.posXcaixaItem1 <= (400) && posYcaixaItem1 >= 300) {
-			this.caixaItem1 = new Item("caixaItem1", imagens.getcaixaItemTopEsq(), 0, 0); //getcaixaItemBaixoEsq
-		}
-		
-		if (this.posXcaixaItem2 <= (400) && posYcaixaItem1 >= 300) {
-			this.caixaItem2 = new Item("caixaItem1", imagens.getcaixaItemTopEsq(), 0, 0); //getcaixaItemBaixoEsq
-		}
-		
-		if (this.posXcaixaItem2 <= (400) && posYcaixaItem1 >= 300) {
-			this.caixaItem2 = new Item("caixaItem1", imagens.getcaixaItemTopEsq(), 0, 0); ////getcaixaItemBaixoEsq
-		}
-
-		this.caixaItem1.trasladar(this.posXcaixaItem1, this.posYcaixaItem1);
-		this.caixaItem2.trasladar(this.posXcaixaItem2, this.posYcaixaItem2);
-		this.caixaItem3.trasladar(this.posXcaixaItem3, this.posYcaixaItem3);
-	}
-	
-	
 
 	public void ativaCoracaoVida() {
 
-		if (coracao.colidiuCoracao(coracao, connor) && caixaDestruida1) {
+		if (coracao.colidiuCoracao(coracao, connor) && caixaItemDestruida1) {
 
 			this.caixaItem1 = new Item("caixaItem1", null, -100, -100);
 
@@ -285,27 +263,27 @@ public class ConnorsRedemption extends Game implements KeyListener {
 
 	public void connorPerdeVida() {
 
-		if (connor.colidiuInimigo(inimigo, connor)) {
+		if (this.connor.colidiuInimigo(inimigo, connor)) {
 
-			if (connor.getVida() == 3) {
+			if (this.connor.getVida() == 3) {
 				this.frenteCoracaoHud1 = new Item("coracaoBase1", imagens.getBaseCoracao(), getWidth() - 785,
 						getHeight() - 550);
 			}
 
-			if (connor.getVida() == 2) {
+			if (this.connor.getVida() == 2) {
 				this.frenteCoracaoHud2 = new Item("coracaoBase2", imagens.getBaseCoracao(), getWidth() - 785,
 						getHeight() - 530);
 			}
 
-			if (connor.getVida() == 1) {
+			if (this.connor.getVida() == 1) {
 				this.frenteCoracaoHud3 = new Item("coracaoBase3", imagens.getBaseCoracao(), getWidth() - 785,
 						getHeight() - 510);
 
 			}
-			connor.perdeVida();
+			this.connor.perdeVida();
 			this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
 
-			if (connor.getVida() <= 0) {
+			if (this.connor.getVida() <= 0) {
 				System.out.println("VOCE PERDEU!!!!      "
 						+ "<<<Não consegu acessar o metodo finalizar() ou a variavel jogoAtivo>>");
 			}
@@ -326,7 +304,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	}
 
 	public void colisaoConnorArma() {
-		if (connor.colidiuArma(arma1, connor) && caixaDestruida2) {
+		if (connor.colidiuArma(arma1, connor) && caixaItemDestruida2) {
 
 			this.caixaItem2 = new Item("caixaItem2", null, -300, -300);
 			this.arma1 = new Item("arma1", null, -400, -400);
@@ -334,7 +312,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 			this.armaHud1.trasladar(getWidth() - 50, getHeight() - 550);
 		}
 
-		if (connor.colidiuArma(arma2, connor) && caixaDestruida3) {
+		if (connor.colidiuArma(arma2, connor) && caixaItemDestruida3) {
 
 			this.caixaItem3 = new Item("caixaItem3", null, -400, -400);
 			this.arma2 = new Item("arma2", null, -500, -500);
@@ -346,23 +324,226 @@ public class ConnorsRedemption extends Game implements KeyListener {
 
 	public void colisaoBalaCaixaItem() {
 		if (caixaItem1.colidiuCaixa(this.caixaItem1, this.bala)) {
-			this.caixaDestruida1 = true;
+			this.caixaItemDestruida1 = true;
 			this.caixaItem1 = new Item("caixaItem1", null, -500, -500);
 		}
 
 		if (caixaItem2.colidiuCaixa(this.caixaItem2, this.bala)) {
-			this.caixaDestruida2 = true;
+			this.caixaItemDestruida2 = true;
 			this.caixaItem2 = new Item("caixaItem2", null, -600, -600);
 		}
 
 		if (caixaItem3.colidiuCaixa(this.caixaItem3, this.bala)) {
-			this.caixaDestruida3 = true;
+			this.caixaItemDestruida3 = true;
 			this.caixaItem3 = new Item("caixaItem3", null, -700, -700);
 		}
 	}
 
+	public void colisaoConnorCaixaCaveira() {
+
+		if (caixaCaveira1.colidiuCaixaCaveira(this.caixaCaveira1, this.connor)){
+			this.connor.perdeVida();
+
+			if (this.connor.getVida() == 2) {
+				this.frenteCoracaoHud1 = new Item("coracaoBase1", imagens.getBaseCoracao(), getWidth() - 785,
+						getHeight() - 550);
+			}
+
+			if (this.connor.getVida() == 1) {
+				this.frenteCoracaoHud2 = new Item("coracaoBase2", imagens.getBaseCoracao(), getWidth() - 785,
+						getHeight() - 530);
+			}
+
+			if (this.connor.getVida() == 0 ) {
+				this.frenteCoracaoHud3 = new Item("coracaoBase3", imagens.getBaseCoracao(), getWidth() - 785,
+						getHeight() - 510);
+			}
+			this.explosaoCaveira1 = new Item("exp1", imagens.getExplosaoCaixaCaveira1(), this.caixaCaveira1.getPosX(),
+					this.caixaCaveira1.getPosY());
+
+			//this.caixaICaveiraDestruida1 = true;
+			this.caixaCaveira1 = new Item("caixaCaveira1", null, -800, -800);
+
+		}
+
+		if (caixaCaveira2.colidiuCaixaCaveira(this.caixaCaveira2, this.connor)) {
+			this.connor.perdeVida();
+
+			if (this.connor.getVida() == 2 ) {
+				this.frenteCoracaoHud1 = new Item("coracaoBase1", imagens.getBaseCoracao(), getWidth() - 785,
+						getHeight() - 550);
+			}
+
+			if (this.connor.getVida() == 1 ) {
+				this.frenteCoracaoHud2 = new Item("coracaoBase2", imagens.getBaseCoracao(), getWidth() - 785,
+						getHeight() - 530);
+			}
+
+			if (this.connor.getVida() == 0 ) {
+				this.frenteCoracaoHud3 = new Item("coracaoBase3", imagens.getBaseCoracao(), getWidth() - 785,
+						getHeight() - 510);
+			}
+			this.explosaoCaveira1 = new Item("exp2", imagens.getExplosaoCaixaCaveira1(), this.caixaCaveira2.getPosX(),
+					this.caixaCaveira2.getPosY());
+
+			//this.caixaICaveiraDestruida2 = true;
+			this.caixaCaveira2 = new Item("caixaCaveira2", null, -900, -900);
+
+		}
+
+		if (caixaCaveira3.colidiuCaixaCaveira(this.caixaCaveira3, this.connor)) {
+			this.connor.perdeVida();
+
+			if (this.connor.getVida() == 2 ) {
+				this.frenteCoracaoHud1 = new Item("coracaoBase1", imagens.getBaseCoracao(), getWidth() - 785,
+						getHeight() - 550);
+			}
+
+			if (this.connor.getVida() == 1 ) {
+				this.frenteCoracaoHud2 = new Item("coracaoBase2", imagens.getBaseCoracao(), getWidth() - 785,
+						getHeight() - 530);
+			}
+
+			if (this.connor.getVida() == 0 ) {
+				this.frenteCoracaoHud3 = new Item("coracaoBase3", imagens.getBaseCoracao(), getWidth() - 785,
+						getHeight() - 510);
+			}
+			this.explosaoCaveira3 = new Item("exp3", imagens.getExplosaoCaixaCaveira1(), this.caixaCaveira3.getPosX(),
+					this.caixaCaveira3.getPosY());
+
+			//this.caixaICaveiraDestruida3 = true;
+			this.caixaCaveira3 = new Item("caixaCaveira3", null, -1000, -1000);
+
+		}
+	}
+
+	public void carregaImgCxItemQuadranteCorreto() {
+
+		// top dir
+		if (this.posXcaixaItem1 >= (400) && posYcaixaItem1 <= 300) {
+			this.caixaItem1 = new Item("caixaItem1", imagens.getcaixaItemTopDir(), 0, 0);
+
+		}
+
+		if (this.posXcaixaItem2 >= (400) && posYcaixaItem2 <= 300) {
+			this.caixaItem2 = new Item("caixaItem2", imagens.getcaixaItemTopDir(), 0, 0);
+		}
+
+		if (this.posXcaixaItem3 >= (400) && posYcaixaItem3 <= 300) {
+			this.caixaItem3 = new Item("caixaItem3", imagens.getcaixaItemTopDir(), 0, 0);
+		}
+
+		// top esq
+		if (this.posXcaixaItem1 <= (400) && posYcaixaItem1 <= 300) {
+			this.caixaItem1 = new Item("caixaItem1", imagens.getcaixaItemTopEsq(), 0, 0);
+		}
+
+		if (this.posXcaixaItem2 <= (400) && posYcaixaItem2 <= 300) {
+			this.caixaItem2 = new Item("caixaItem2", imagens.getcaixaItemTopEsq(), 0, 0);
+		}
+
+		if (this.posXcaixaItem3 <= (400) && posYcaixaItem3 <= 300) {
+			this.caixaItem3 = new Item("caixaItem3", imagens.getcaixaItemTopEsq(), 0, 0);
+		}
+
+		// baixo dir
+		if (this.posXcaixaItem1 >= (400) && posYcaixaItem1 >= 300) {
+			this.caixaItem1 = new Item("caixaItem1", imagens.getcaixaItemTopDir(), 0, 0); // getcaixaItemBaixoDir
+		}
+
+		if (this.posXcaixaItem2 >= (400) && posYcaixaItem2 >= 300) {
+			this.caixaItem2 = new Item("caixaItem2", imagens.getcaixaItemTopDir(), 0, 0); // getcaixaItemBaixoDir
+		}
+
+		if (this.posXcaixaItem3 >= (400) && posYcaixaItem3 >= 300) {
+			this.caixaItem3 = new Item("caixaItem3", imagens.getcaixaItemTopDir(), 0, 0); // getcaixaItemBaixoDir
+		}
+
+		// baixo esq
+		if (this.posXcaixaItem1 <= (400) && posYcaixaItem1 >= 300) {
+			this.caixaItem1 = new Item("caixaItem1", imagens.getcaixaItemTopEsq(), 0, 0); // getcaixaItemBaixoEsq
+		}
+
+		if (this.posXcaixaItem2 <= (400) && posYcaixaItem2 >= 300) {
+			this.caixaItem2 = new Item("caixaItem2", imagens.getcaixaItemTopEsq(), 0, 0); // getcaixaItemBaixoEsq
+		}
+
+		if (this.posXcaixaItem3 <= (400) && posYcaixaItem3 >= 300) {
+			this.caixaItem3 = new Item("caixaItem3", imagens.getcaixaItemTopEsq(), 0, 0); //// getcaixaItemBaixoEsq
+		}
+
+		this.caixaItem1.trasladar(this.posXcaixaItem1, this.posYcaixaItem1);
+		this.caixaItem2.trasladar(this.posXcaixaItem2, this.posYcaixaItem2);
+		this.caixaItem3.trasladar(this.posXcaixaItem3, this.posYcaixaItem3);
+
+	}
+
+	public void carregaImgCxCaveiraQuadranteCorreto() {
+
+		// top dir
+		if (this.posXcaixaCaveira1 >= (400) && posYcaixaCaveira1 <= 300) {
+			this.caixaCaveira1 = new Item("caixaCaveira1", imagens.getcaixaCaveiraTopDir(), 0, 0);
+
+		}
+
+		if (this.posXcaixaCaveira2 >= (400) && posYcaixaCaveira2 <= 300) {
+			this.caixaCaveira2 = new Item("caixaCaveira2", imagens.getcaixaCaveiraTopDir(), 0, 0);
+		}
+
+		if (this.posXcaixaCaveira3 >= (400) && posYcaixaCaveira3 <= 300) {
+			this.caixaCaveira3 = new Item("caixaCaveira3", imagens.getcaixaCaveiraTopDir(), 0, 0);
+
+		}
+
+		// top esq
+		if (this.posXcaixaCaveira1 <= (400) && posYcaixaCaveira1 <= 300) {
+			this.caixaCaveira1 = new Item("caixaCaveira1", imagens.getcaixaCaveiraTopEsq(), 0, 0);
+
+		}
+
+		if (this.posXcaixaCaveira2 <= (400) && posYcaixaCaveira2 <= 300) {
+			this.caixaCaveira2 = new Item("caixaCaveira2", imagens.getcaixaCaveiraTopEsq(), 0, 0);
+		}
+
+		if (this.posXcaixaCaveira3 <= (400) && posYcaixaCaveira3 <= 300) {
+			this.caixaCaveira3 = new Item("caixaCaveira3", imagens.getcaixaCaveiraTopEsq(), 0, 0);
+
+		}
+
+		// baixo dir
+		if (this.posXcaixaCaveira1 >= (400) && posYcaixaCaveira1 >= 300) {
+			this.caixaCaveira1 = new Item("caixaCaveira1", imagens.getcaixaCaveiraTopDir(), 0, 0);
+		}
+
+		if (this.posXcaixaCaveira2 >= (400) && posYcaixaCaveira2 >= 300) {
+			this.caixaCaveira2 = new Item("caixaCaveira2", imagens.getcaixaCaveiraTopDir(), 0, 0);
+		}
+
+		if (this.posXcaixaCaveira3 >= (400) && posYcaixaCaveira3 >= 300) {
+			this.caixaCaveira3 = new Item("caixaCaveira3", imagens.getcaixaCaveiraTopDir(), 0, 0);
+		}
+
+		// baixo esq
+		if (this.posXcaixaCaveira1 <= (400) && posYcaixaCaveira1 >= 300) {
+			this.caixaCaveira1 = new Item("caixaCaveira1", imagens.getcaixaCaveiraTopEsq(), 0, 0);
+		}
+
+		if (this.posXcaixaCaveira2 <= (400) && posYcaixaCaveira2 >= 300) {
+			this.caixaCaveira2 = new Item("caixaCaveira2", imagens.getcaixaCaveiraTopEsq(), 0, 0);
+		}
+
+		if (this.posXcaixaCaveira3 <= (400) && posYcaixaCaveira3 >= 300) {
+			this.caixaCaveira3 = new Item("caixaCaveira3", imagens.getcaixaCaveiraTopEsq(), 0, 0);
+		}
+
+		this.caixaCaveira1.trasladar(this.posXcaixaCaveira1, this.posYcaixaCaveira1);
+		this.caixaCaveira2.trasladar(this.posXcaixaCaveira2, this.posYcaixaCaveira2);
+		this.caixaCaveira3.trasladar(this.posXcaixaCaveira3, this.posYcaixaCaveira3);
+
+	}
+
 	public void colisaoConnorBalaTela() {
-		
+
 		this.inimigo.setCont(this.inimigo.getCont() + 1);
 		boolean colisao = this.inimigo.colidiuBala(bala);
 
