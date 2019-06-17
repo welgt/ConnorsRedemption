@@ -12,6 +12,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	private Bala bala;
 	private Inimigo inimigo;
 	private Fase fase1;
+	private TileMap tileMap;
 	// private CarregaSom som;
 	private Vida coracao;
 
@@ -67,6 +68,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.bala = null;
 		this.inimigo = null;
 		this.fase1 = null;
+		this.tileMap = null;
 
 		this.coracao = null;
 		this.arma1 = null;
@@ -112,6 +114,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.connor = new Jogador("Connor", imagens.getImgConnor(), imagens.getImgTiro());
 		this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
 		this.fase1 = new Fase(imagens.getImgMapa());
+		this.tileMap = new TileMap(15, 27);
 		// this.som = new CarregaSom();
 		// som.loop();
 
@@ -552,7 +555,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 			this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
 		}
 		if (this.inimigo.getCont() % 400 == 0) {
-			this.inimigo.andarEsquerda();
+			//this.inimigo.andarEsquerda();
 			this.inimigo.setCont(0);
 		}
 
