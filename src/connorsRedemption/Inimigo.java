@@ -9,11 +9,13 @@ public class Inimigo extends Personagem{
 	private int rot;
 	private int posImg;
 	private int cont;
+	private Node noAtual;
+	private boolean achou;
 	
 	public Inimigo(String nome, Image[] img) {
 		super(nome);
-		this.setPosX(500.0);
-		this.setPosY(500.0);
+		this.setPosX(160.0);
+		this.setPosY(100.0);
 		this.img = img;
 		this.rot = 0;
 		this.posImg = 0;
@@ -21,7 +23,17 @@ public class Inimigo extends Personagem{
 		this.setVida(3);
 		this.setSangue(100);
 		this.cont = 0;
+		this.noAtual = null;
+		this.achou = true;
 		
+	}
+	
+	public boolean getAchou() {
+		return this.achou;
+	}
+	
+	public void setAchou(boolean achou) {
+		this.achou = achou;
 	}
 	
 	public int getCont() {
@@ -51,6 +63,14 @@ public class Inimigo extends Personagem{
 		}
 		return false;
 		
+	}
+	
+	public void setNoAtual(Node no) {
+		this.noAtual = no;
+	}
+	
+	public Node getNoAtual() {
+		return this.noAtual;
 	}
 	
 	@Override

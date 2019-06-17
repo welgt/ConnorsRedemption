@@ -14,11 +14,11 @@ public class Jogador extends Personagem{
 	
 	public Jogador(String nome, Image[] imgConnor, Image[] imgTiro) {
 		super(nome);
-		this.setPosX(50.0);
-		this.setPosY(50.0);
+		this.setPosX(460.0);
+		this.setPosY(500.0);
 		this.imgConnor = imgConnor;
 		this.imgTiro = imgTiro;
-		this.rotConnor = 0;
+		this.rotConnor = 180;
 		this.posImgConnor = 0;
 		this.setVelocidade(30.0);
 		this.setVida(3);
