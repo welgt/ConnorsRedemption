@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.awt.geom.AffineTransform;
 
 public class Bala {
-	
+
 	private Image[] skinBala;
 	private int posImgBala;
 	private int rotTiro;
@@ -14,8 +14,8 @@ public class Bala {
 	private double posY;
 	private char direcao;
 	private int cont;
-	
-	public Bala (Image[] skinBala, int rotTiro, char direcao, int danoBala, double posX, double posY) {
+
+	public Bala(Image[] skinBala, int rotTiro, char direcao, int danoBala, double posX, double posY) {
 		this.skinBala = skinBala;
 		this.danoBala = danoBala;
 		this.posX = posX;
@@ -26,88 +26,84 @@ public class Bala {
 		this.direcao = direcao;
 		this.cont = 0;
 	}
-	
+
 	public char getDirecao() {
 		return this.direcao;
 	}
-	
+
 	public int getCont() {
 		return this.cont;
 	}
-	
+
 	public void setCont(int x) {
 		this.cont = x;
 	}
-	
+
 	public void setPosImgBala(int x) {
 		this.posImgBala = x;
 	}
-	
+
 	public boolean colidiuTela() {
-		if(this.posX >= 750 || this.posX <= 10) {
+		if (this.posX >= 750 || this.posX <= 10) {
 			return true;
 		}
-		if(this.posY >= 550 || this.posY <= 30) {
+		if (this.posY >= 550 || this.posY <= 30) {
 			return true;
 		}
 		return false;
 	}
-	
-	public void setDanoBala (int danoBala) {
-	    
+
+	public void setDanoBala(int danoBala) {
+
 		this.danoBala = danoBala;
 	}
-	
-	public int getDanoBala () {
+
+	public int getDanoBala() {
 		return this.danoBala;
 	}
-	
-	public void setVelocidadeBalaX(double velocidadeBalaX) {
-		this.velocidadeBala = this.posX * velocidadeBalaX; // incrementa pixel em loop Game (confirmar)
-		  // ajustar velocidade conforme poder de processamento de cada maquina
+
+	public void setVelocidade(double velocidade) {
+		double velX = this.posX * velocidade;
+		double velY = this.posY * velocidade;
+		AffineTransform trans = AffineTransform.getTranslateInstance(velX, velY);
 	}
-	
-	public void setVelocidadeBalaY(double velocidadeBalaY) {
-		this.velocidadeBala = this.posY * velocidadeBalaY; // incrementa pixel em loop Game (confirmar)
-		  // ajustar velocidade conforme poder de processamento de cada maquina
-	}
-	
+
 	public double getPosXbala() {
 		return this.posX;
 	}
-	
+
 	public double getPosYbala() {
 		return this.posY;
 	}
-	
+
 	public double getVelocidadeBala() {
 		return this.velocidadeBala;
 	}
-	
+
 	public Bala disparar(boolean horizontal) {
 		if (horizontal) {
 			this.posX = this.posX * this.velocidadeBala;
-		}else {
+		} else {
 			this.posY = this.posY * this.velocidadeBala;
 		}
 		return this;
 	}
-	
-	public void setPosicaoInicialBala (double x, double y) {
+
+	public void setPosicaoInicialBala(double x, double y) {
 		this.posX = x;
 		this.posY = y;
 	}
-	
+
 	public Image getImgBala() {
 		return this.skinBala[this.posImgBala];
 	}
-	
+
 	public AffineTransform getRotacao() {
 		AffineTransform at = AffineTransform.getTranslateInstance(this.getPosXbala(), this.getPosYbala());
-		at.rotate(Math.toRadians(this.rotTiro), skinBala[this.posImgBala].getWidth(null)/2, skinBala[this.posImgBala].getHeight(null)/2);
+		at.rotate(Math.toRadians(this.rotTiro), skinBala[this.posImgBala].getWidth(null) / 2,
+				skinBala[this.posImgBala].getHeight(null) / 2);
 		return at;
-		
+
 	}
-	 
 
 }

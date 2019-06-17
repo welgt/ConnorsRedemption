@@ -1,7 +1,6 @@
 package connorsRedemption;
 
 import java.awt.Image;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,10 +21,8 @@ public class CarregaImagem {
 	private Image frenteCoracao;
 	private Image arma1;
 	private Image arma2;
-	private Image caixaItemTopDir;
+	private Image [] caixaItem;
 
-	
-	
 
 	public CarregaImagem() {
 		
@@ -40,7 +37,8 @@ public class CarregaImagem {
 		this.frenteCoracao = frenteCoracao();
 		this.arma1 = arma1();
 		this.arma2 = arma2();
-		this.caixaItemTopDir = caixaItemTopDir();
+		this.caixaItem = caixaItem();
+		
 		
 	
 
@@ -271,22 +269,49 @@ public class CarregaImagem {
 	
 	
 	
-	private Image caixaItemTopDir() {
+	private Image [] caixaItem() {
 
-		File arquivo = new File("res\\imagens\\caixaItemTopDir.png");
+		File arquivo0 = new File("res\\imagens\\caixaItemTopDir.png");
+		File arquivo1 = new File("res\\imagens\\caixaItemTopEsq.png");
+		File arquivo2 = new File("res\\imagens\\caixaItemBaixoDir.png");
+		File arquivo3 = new File("res\\imagens\\caixaItemBaixoEsq.png");
+		
+		
 
 		try {
-			BufferedImage imagem = ImageIO.read(arquivo);
-			this.caixaItemTopDir = imagem.getScaledInstance(40,40, 1);
+			BufferedImage imagem0 = ImageIO.read(arquivo0);
+			BufferedImage imagem1 = ImageIO.read(arquivo1);
+			BufferedImage imagem2 = ImageIO.read(arquivo2);
+			BufferedImage imagem3 = ImageIO.read(arquivo3);
 
-			return caixaItemTopDir;
+			Image[] img = new Image[4];
+			
+			img[0] = imagem0.getScaledInstance(40,40, 1);
+			img[1] = imagem1.getScaledInstance(40,40, 1);
+			img[2] = imagem2.getScaledInstance(40,40, 1);
+			img[3] = imagem3.getScaledInstance(40,40, 1);
+
+			return img;
 		} catch (IOException e) {
-			throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
+			throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " 
+					+ arquivo0+"ou"+ arquivo1+"ou"+arquivo2 + arquivo3, e);
 		}
 	}
 	
 	public Image getcaixaItemTopDir() {
-		return this.caixaItemTopDir;
+		return this.caixaItem[0];
+	}
+	
+	public Image getcaixaItemTopEsq() {
+		return this.caixaItem[1];
+	}
+	
+	public Image getcaixaItemBaixoDir() {
+		return this.caixaItem[2];
+	}
+	
+	public Image getcaixaItemBaixoEsq() {
+		return this.caixaItem[3];
 	}
 	
 	
