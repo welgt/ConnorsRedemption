@@ -56,7 +56,7 @@ public class Inimigo extends Personagem{
 		*/
 		if(bala != null) {
 			Rectangle r1 = new Rectangle((int) this.getPosX(), (int) this.getPosY(), 16, 16);
-			Rectangle r2 = new Rectangle((int) bala.getPosXbala(), (int) bala.getPosYbala(), 20, 20);
+			Rectangle r2 = new Rectangle((int) bala.getPosX(), (int) bala.getPosY(), 20, 20);
 			if (r1.intersects(r2)) {
 			    return true;
 			}

@@ -5,24 +5,23 @@ import java.awt.geom.AffineTransform;
 
 public class Bala {
 
-	private Image[] skinBala;
-	private int posImgBala;
-	private int rotTiro;
-	private int danoBala;
-	private double velocidadeBala;
+	private Image[] skin;
+	private int posImg;
+	private int rot;
+	private int dano;
+	private double velocidade;
 	private double posX;
 	private double posY;
 	private char direcao;
 	private int cont;
 
-	public Bala(Image[] skinBala, int rotTiro, char direcao, int danoBala, double posX, double posY) {
-		this.skinBala = skinBala;
-		this.danoBala = danoBala;
+	public Bala(Image[] skin, int rot, char direcao, int dano, double posX, double posY) {
+		this.skin = skin;
+		this.dano = dano;
 		this.posX = posX;
 		this.posY = posY;
-		this.velocidadeBala = 1.0;
-		this.posImgBala = 0;
-		this.rotTiro = rotTiro;
+		this.posImg = 0;
+		this.rot = rot;
 		this.direcao = direcao;
 		this.cont = 0;
 	}
@@ -40,7 +39,7 @@ public class Bala {
 	}
 
 	public void setPosImgBala(int x) {
-		this.posImgBala = x;
+		this.posImg = x;
 	}
 
 	public boolean colidiuTela() {
@@ -53,38 +52,49 @@ public class Bala {
 		return false;
 	}
 
-	public void setDanoBala(int danoBala) {
+	public void setDanoBala(int dano) {
 
-		this.danoBala = danoBala;
+		this.dano = dano;
 	}
 
 	public int getDanoBala() {
-		return this.danoBala;
+		return this.dano;
 	}
 
-	public void setVelocidade(double velocidade) {
-		double velX = this.posX * velocidade;
-		double velY = this.posY * velocidade;
-		AffineTransform trans = AffineTransform.getTranslateInstance(velX, velY);
+	
+	public void  setVelocidade(Bala bala, double velocidadeX, double velocidadeY) {
+		bala.setPosX(this.getPosX()+ velocidadeX);
+		bala.setPosY(this.getPosY()+ velocidadeY);
+		
 	}
 
-	public double getPosXbala() {
+
+	public double getPosX() {
 		return this.posX;
 	}
-
-	public double getPosYbala() {
+	
+	public void setPosX(double posX) {
+		this.posX = posX;
+	}
+	
+	public double getPosY () {
 		return this.posY;
 	}
 
-	public double getVelocidadeBala() {
-		return this.velocidadeBala;
+	
+	public void setPosY(double posY) {
+		this.posY = posY;
 	}
 
+	public double getVelocidade() {
+		return this.velocidade;
+	}
+	
 	public Bala disparar(boolean horizontal) {
 		if (horizontal) {
-			this.posX = this.posX * this.velocidadeBala;
+			this.posX = this.posX * this.velocidade;
 		} else {
-			this.posY = this.posY * this.velocidadeBala;
+			this.posY = this.posY * this.velocidade;
 		}
 		return this;
 	}
@@ -95,13 +105,13 @@ public class Bala {
 	}
 
 	public Image getImgBala() {
-		return this.skinBala[this.posImgBala];
+		return this.skin[this.posImg];
 	}
 
 	public AffineTransform getRotacao() {
-		AffineTransform at = AffineTransform.getTranslateInstance(this.getPosXbala(), this.getPosYbala());
-		at.rotate(Math.toRadians(this.rotTiro), skinBala[this.posImgBala].getWidth(null) / 2,
-				skinBala[this.posImgBala].getHeight(null) / 2);
+		AffineTransform at = AffineTransform.getTranslateInstance(this.getPosX(), this.getPosY());
+		at.rotate(Math.toRadians(this.rot), skin[this.posImg].getWidth(null) / 2,
+				skin[this.posImg].getHeight(null) / 2);
 		return at;
 
 	}

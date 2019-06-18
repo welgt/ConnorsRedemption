@@ -2,6 +2,7 @@ package connorsRedemption;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -132,7 +133,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.imagens = new CarregaImagem();
 		this.connor = new Jogador("Connor", imagens.getImgConnor(), imagens.getImgTiro());
 		this.connor.setVelocidade(50);
-		this.bala.setVelocidade(50);
+		
 		this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
 		this.fase1 = new Fase(imagens.getImgMapa());
 		this.tileMap = new TileMap(15, 27);
@@ -192,6 +193,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		colisaoBalaCaixaItem();
 		colisaoConnorCaixaCaveira();
 		
+		
 
 	}
 
@@ -227,6 +229,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		g.drawImage(this.explosaoCaveira1.getImgItem(), this.explosaoCaveira1.getRotacao(), null);
 		g.drawImage(this.explosaoCaveira2.getImgItem(), this.explosaoCaveira2.getRotacao(), null);
 		g.drawImage(this.explosaoCaveira3.getImgItem(), this.explosaoCaveira3.getRotacao(), null);
+		
 		
 	}
 	
@@ -385,20 +388,22 @@ public class ConnorsRedemption extends Game implements KeyListener {
 			this.inimigo.andarBaixo();
 			this.inimigo.setCont(0);
 		}
+		
+		
 
 		if (this.bala != null) {
 			if (!this.bala.colidiuTela() && !colisao) {
 				if (this.bala.getDirecao() == 'd') {
-					this.bala.setPosicaoInicialBala(this.bala.getPosXbala() + 0.05, this.bala.getPosYbala());
+					this.bala.setVelocidade(this.bala, 0.5,0);
 				}
 				if (this.bala.getDirecao() == 'b') {
-					this.bala.setPosicaoInicialBala(this.bala.getPosXbala(), this.bala.getPosYbala() + 0.05);
+					this.bala.setVelocidade(bala, 0, 0.5);
 				}
 				if (this.bala.getDirecao() == 'e') {
-					this.bala.setPosicaoInicialBala(this.bala.getPosXbala() - 0.05, this.bala.getPosYbala());
+					this.bala.setVelocidade(bala, -0.5,0);
 				}
 				if (this.bala.getDirecao() == 'c') {
-					this.bala.setPosicaoInicialBala(this.bala.getPosXbala(), this.bala.getPosYbala() - 0.05);
+					this.bala.setVelocidade(bala, 0, -0.5);
 				}
 			} else {
 				this.bala.setPosImgBala(3);

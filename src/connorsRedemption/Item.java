@@ -10,7 +10,6 @@ public class Item {
     private Image skinItem;
 	private double posX;
 	private double posY;
-	private int raioColisao;
 	private int rotItem;
 	private boolean perdeuVida;
 
@@ -22,7 +21,6 @@ public class Item {
 		this.nome = nome;
 		this.posX = posX;
 		this.posY = posY;
-		this.raioColisao = 100; // tera que ajustar fazendo testes provavelmente.
 		this.perdeuVida = false;
 		
 	}
@@ -110,7 +108,7 @@ public class Item {
 
 		if (caixa != null && bala != null) {
 			Rectangle r1 = new Rectangle((int) caixa.getPosX(), (int) caixa.getPosY(), 45, 45);
-			Rectangle r2 = new Rectangle((int) bala.getPosXbala(), (int) bala.getPosYbala(), 25, 25);
+			Rectangle r2 = new Rectangle((int) bala.getPosX(), (int) bala.getPosY(), 25, 25);
 			if (r1.intersects(r2)) {
 				return true;
 				
