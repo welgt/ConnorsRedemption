@@ -131,6 +131,8 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		
 		this.imagens = new CarregaImagem();
 		this.connor = new Jogador("Connor", imagens.getImgConnor(), imagens.getImgTiro());
+		this.connor.setVelocidade(50);
+		this.bala.setVelocidade(50);
 		this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
 		this.fase1 = new Fase(imagens.getImgMapa());
 		this.tileMap = new TileMap(15, 27);
@@ -147,10 +149,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.baseHudDir = new Item("baseHudDir", imagens.getBaseHud(), 0, 0);
 		this.baseHudEsq.trasladar(0, 0);
 		this.baseHudDir.trasladar(getWidth() - 40, 0);
-
-		this.coracao = new Vida("coracao", imagens.getImgCoracao(), 0, 0);
-		this.coracao.trasladar(this.posXcaixaItem1, this.posYcaixaItem1);
-
+		
 		this.frenteCoracaoHud1 = new Item("frenteCoracaoHud1", imagens.getFrenteCoracao(), 0, 0);
 		this.frenteCoracaoHud2 = new Item("frenteCoracaoHud2", imagens.getFrenteCoracao(), 0, 0);
 		this.frenteCoracaoHud3 = new Item("frenteCoracaoHud3", imagens.getFrenteCoracao(), 0, 0);
@@ -158,12 +157,13 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.frenteCoracaoHud2.trasladar(getWidth() - 785, getHeight() - 530);
 		this.frenteCoracaoHud3.trasladar(getWidth() - 785, getHeight() - 510);
 
+		this.flipArmasHud = new Item("FlipeArmasHud", imagens.getFlipArmasHud(),getWidth()-45, getHeight()-575);
 		this.armaHud1 = new Item("armaHud1", imagens.getArma1(), 0, 0);
 		this.armaHud2 = new Item("armaHud2", imagens.getArma2(), 0, 0);
-		this.flipArmasHud = new Item("FlipeArmasHud", imagens.getFlipArmasHud(),getWidth()-45, getHeight()-575);
-		
-		
 
+		this.coracao = new Vida("coracao", imagens.getImgCoracao(), 0, 0);
+		this.coracao.trasladar(this.posXcaixaItem1, this.posYcaixaItem1);
+		
 		this.arma1 = new Item("arma1", imagens.getArma1(), 0, 0);
 		this.arma2 = new Item("arma2", imagens.getArma2(), 0, 0);
 		this.arma1.trasladar(this.posXcaixaItem2, this.posYcaixaItem2);
@@ -208,6 +208,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		}
 
 		desenhaHud(g);
+		
 		g.drawImage(this.inimigo.getImagem(), this.inimigo.getRotacao(), null);
 		g.drawImage(this.coracao.getImgItem(), this.coracao.getRotacao(), null);
 
@@ -228,38 +229,21 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		g.drawImage(this.explosaoCaveira3.getImgItem(), this.explosaoCaveira3.getRotacao(), null);
 		
 	}
+	
+	public void desenhaHud(Graphics2D g) {
 
-	public void keyTyped(KeyEvent e) {
+		g.drawImage(this.baseHudDir.getImgItem(), this.baseHudDir.getRotacao(), null);
+		g.drawImage(this.baseHudEsq.getImgItem(), this.baseHudEsq.getRotacao(), null);
 
-	}
-
-	public void keyPressed(KeyEvent e) {
-		switch (e.getKeyCode()) {
-		case KeyEvent.VK_UP:
-			this.connor.andarCima();
-			break;
-		case KeyEvent.VK_DOWN:
-			this.connor.andarBaixo();
-			break;
-		case KeyEvent.VK_LEFT:
-			this.connor.andarEsquerda();
-			break;
-		case KeyEvent.VK_RIGHT:
-			this.connor.andarDireita();
-			break;
-		case KeyEvent.VK_SPACE:
-			this.bala = connor.atirar();
-			break;
-		case KeyEvent.VK_ESCAPE:
-			this.finalizar();
-			break;
-		}
+		g.drawImage(this.frenteCoracaoHud1.getImgItem(), this.frenteCoracaoHud1.getRotacao(), null);
+		g.drawImage(this.frenteCoracaoHud2.getImgItem(), this.frenteCoracaoHud2.getRotacao(), null);
+		g.drawImage(this.frenteCoracaoHud3.getImgItem(), this.frenteCoracaoHud3.getRotacao(), null);
+		
+		g.drawImage(this.armaHud1.getImgItem(), this.armaHud1.getRotacao(), null);
+		g.drawImage(this.armaHud2.getImgItem(), this.armaHud2.getRotacao(), null);
 
 	}
 
-	public void keyReleased(KeyEvent e) {
-
-	}
 
 	// funcoes separadas da logica de cada objeto para manter organizado
 
@@ -324,18 +308,6 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		}
 	}
 
-	public void desenhaHud(Graphics2D g) {
-
-		g.drawImage(this.baseHudDir.getImgItem(), this.baseHudDir.getRotacao(), null);
-		g.drawImage(this.baseHudEsq.getImgItem(), this.baseHudEsq.getRotacao(), null);
-
-		g.drawImage(this.frenteCoracaoHud1.getImgItem(), this.frenteCoracaoHud1.getRotacao(), null);
-		g.drawImage(this.frenteCoracaoHud2.getImgItem(), this.frenteCoracaoHud2.getRotacao(), null);
-		g.drawImage(this.frenteCoracaoHud3.getImgItem(), this.frenteCoracaoHud3.getRotacao(), null);
-		g.drawImage(this.armaHud1.getImgItem(), this.armaHud1.getRotacao(), null);
-		g.drawImage(this.armaHud2.getImgItem(), this.armaHud2.getRotacao(), null);
-
-	}
 
 	public void colisaoConnorArma() {
 		if (connor.colidiuArma(arma1, connor) && caixaItemDestruida2) {
@@ -370,6 +342,69 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		if (caixaItem3.colidiuCaixa(this.caixaItem3, this.bala)) {
 			this.caixaItemDestruida3 = true;
 			this.caixaItem3 = new Item("caixaItem3", null, -700, -700);
+		}
+	}
+	
+	public void colisaoConnorBalaTela() {
+
+		this.inimigo.setCont(this.inimigo.getCont() + 1);
+		boolean colisao = this.inimigo.colidiuBala(bala);
+
+		if (colisao) {
+
+			this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
+		}
+		if (this.inimigo.getCont() % 400 == 0) {
+
+			/*
+			if(this.caminho.size()>0) {
+				
+				if(this.inimigo.getAchou()) {
+					this.noAux = this.caminho.remove(0);
+					this.inimigo.setAchou(false);
+				}
+				
+				
+				if(this.inimigo.getNoAtual().getID()/15 < this.noAux.getID() / 15 ) {
+					this.inimigo.andarBaixo();
+					this.inimigo.setNoAtual(this.tileMap.getMap().getMap().get(this.inimigo.getNoAtual().getID()+27));
+					
+				} else if((this.inimigo.getNoAtual().getID()%26) - 1 < (this.noAux.getID() % 26) - 1 ) {
+					this.inimigo.andarDireita();
+					this.inimigo.setNoAtual(this.tileMap.getMap().getMap().get(this.noAux.getID()+1));
+					
+				}
+				
+				if(this.noAux.getID() == this.inimigo.getNoAtual().getID()) {
+					this.inimigo.setNoAtual(this.noAux);
+					this.inimigo.setAchou(true);
+				}
+
+			}
+			*/
+			this.inimigo.andarBaixo();
+			this.inimigo.setCont(0);
+		}
+
+		if (this.bala != null) {
+			if (!this.bala.colidiuTela() && !colisao) {
+				if (this.bala.getDirecao() == 'd') {
+					this.bala.setPosicaoInicialBala(this.bala.getPosXbala() + 0.05, this.bala.getPosYbala());
+				}
+				if (this.bala.getDirecao() == 'b') {
+					this.bala.setPosicaoInicialBala(this.bala.getPosXbala(), this.bala.getPosYbala() + 0.05);
+				}
+				if (this.bala.getDirecao() == 'e') {
+					this.bala.setPosicaoInicialBala(this.bala.getPosXbala() - 0.05, this.bala.getPosYbala());
+				}
+				if (this.bala.getDirecao() == 'c') {
+					this.bala.setPosicaoInicialBala(this.bala.getPosXbala(), this.bala.getPosYbala() - 0.05);
+				}
+			} else {
+				this.bala.setPosImgBala(3);
+				this.bala.setCont(this.bala.getCont() + 1);
+				this.bala = null;
+			}
 		}
 	}
 
@@ -576,66 +611,36 @@ public class ConnorsRedemption extends Game implements KeyListener {
 
 	}
 
-	public void colisaoConnorBalaTela() {
 
-		this.inimigo.setCont(this.inimigo.getCont() + 1);
-		boolean colisao = this.inimigo.colidiuBala(bala);
+	public void keyTyped(KeyEvent e) {
 
-		if (colisao) {
+	}
 
-			this.inimigo = new Inimigo("Inimigo1", imagens.getImgInimigo());
-		}
-		if (this.inimigo.getCont() % 400 == 0) {
-
-			/*
-			if(this.caminho.size()>0) {
-				
-				if(this.inimigo.getAchou()) {
-					this.noAux = this.caminho.remove(0);
-					this.inimigo.setAchou(false);
-				}
-				
-				
-				if(this.inimigo.getNoAtual().getID()/15 < this.noAux.getID() / 15 ) {
-					this.inimigo.andarBaixo();
-					this.inimigo.setNoAtual(this.tileMap.getMap().getMap().get(this.inimigo.getNoAtual().getID()+27));
-					
-				} else if((this.inimigo.getNoAtual().getID()%26) - 1 < (this.noAux.getID() % 26) - 1 ) {
-					this.inimigo.andarDireita();
-					this.inimigo.setNoAtual(this.tileMap.getMap().getMap().get(this.noAux.getID()+1));
-					
-				}
-				
-				if(this.noAux.getID() == this.inimigo.getNoAtual().getID()) {
-					this.inimigo.setNoAtual(this.noAux);
-					this.inimigo.setAchou(true);
-				}
-
-			}
-			*/
-			this.inimigo.andarBaixo();
-			this.inimigo.setCont(0);
+	public void keyPressed(KeyEvent e) {
+		switch (e.getKeyCode()) {
+		case KeyEvent.VK_UP:
+			this.connor.andarCima();
+			break;
+		case KeyEvent.VK_DOWN:
+			this.connor.andarBaixo();
+			break;
+		case KeyEvent.VK_LEFT:
+			this.connor.andarEsquerda();
+			break;
+		case KeyEvent.VK_RIGHT:
+			this.connor.andarDireita();
+			break;
+		case KeyEvent.VK_SPACE:
+			this.bala = connor.atirar();
+			break;
+		case KeyEvent.VK_ESCAPE:
+			this.finalizar();
+			break;
 		}
 
-		if (this.bala != null) {
-			if (!this.bala.colidiuTela() && !colisao) {
-				if (this.bala.getDirecao() == 'd') {
-					this.bala.setPosicaoInicialBala(this.bala.getPosXbala() + 0.05, this.bala.getPosYbala());
-				}
-				if (this.bala.getDirecao() == 'b') {
-					this.bala.setPosicaoInicialBala(this.bala.getPosXbala(), this.bala.getPosYbala() + 0.05);
-				}
-				if (this.bala.getDirecao() == 'e') {
-					this.bala.setPosicaoInicialBala(this.bala.getPosXbala() - 0.05, this.bala.getPosYbala());
-				}
-				if (this.bala.getDirecao() == 'c') {
-					this.bala.setPosicaoInicialBala(this.bala.getPosXbala(), this.bala.getPosYbala() - 0.05);
-				}
-			} else {
-				this.bala.setPosImgBala(3);
-				this.bala.setCont(this.bala.getCont() + 1);
-				this.bala = null;
-			}
-		}
+	}
+
+	public void keyReleased(KeyEvent e) {
+
 	}
 }
