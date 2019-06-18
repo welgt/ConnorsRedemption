@@ -77,8 +77,8 @@ public class Item {
 	public boolean colidiuCoracao(Item coracao, Personagem connor) {
 
 		if (coracao != null) {
-			Rectangle r1 = new Rectangle((int) connor.getPosX(), (int) connor.getPosY(), 20, 20);
-			Rectangle r2 = new Rectangle((int) coracao.getPosX(), (int) coracao.getPosY(), 30, 50);
+			Rectangle r1 = new Rectangle((int) connor.getPosX(), (int) connor.getPosY(), 55, 55);
+			Rectangle r2 = new Rectangle((int) coracao.getPosX(), (int) coracao.getPosY(), 20, 30);
 			if (r1.intersects(r2)) {
 				return true;
 				
@@ -93,8 +93,8 @@ public class Item {
 	public boolean colidiuCaixaCaveira(Item caixa, Personagem connor) {
 
 		if (caixa != null) {
-			Rectangle r1 = new Rectangle((int) connor.getPosX(), (int) connor.getPosY(), 20, 20);
-			Rectangle r2 = new Rectangle((int) caixa.getPosX(), (int) caixa.getPosY(), 30, 50);
+			Rectangle r1 = new Rectangle((int) connor.getPosX(), (int) connor.getPosY(), 55, 55);
+			Rectangle r2 = new Rectangle((int) caixa.getPosX(), (int) caixa.getPosY(), 25, 25);
 			if (r1.intersects(r2)) {
 				return true;
 				

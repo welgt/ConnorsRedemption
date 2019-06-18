@@ -24,6 +24,7 @@ public class CarregaImagem {
 	private Image [] caixaItem;
 	private Image [] caixaCaveira;
 	private Image [] explosaoCaixaCaveira;
+	private Image flipArmasHud;
 
 
 	public CarregaImagem() {
@@ -42,6 +43,7 @@ public class CarregaImagem {
 		this.caixaItem = caixaItem();
 		this.caixaCaveira  = caixaCaveira();
 		this.explosaoCaixaCaveira = explosaoCaixaCaveira();
+		this.flipArmasHud = flipArmasHud();
 		
 	
 
@@ -400,6 +402,26 @@ public class CarregaImagem {
 
 	public Image getExplosaoCaixaCaveira2() {
 		return this.explosaoCaixaCaveira[1];
+	}
+	
+	
+	
+	private Image flipArmasHud() {
+
+		File arquivo = new File("res\\imagens\\flipArmasHud.png");
+
+		try {
+			BufferedImage imagem = ImageIO.read(arquivo);
+			this.flipArmasHud = imagem.getScaledInstance(38,90, 1);
+
+			return flipArmasHud;
+		} catch (IOException e) {
+			throw new IllegalArgumentException("Nao foi possivel carregar o arquivo " + arquivo, e);
+		}
+	}
+	
+	public Image getFlipArmasHud() {
+		return this.flipArmasHud;
 	}
 
 }

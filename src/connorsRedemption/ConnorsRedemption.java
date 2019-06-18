@@ -22,7 +22,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 
 	private Item arma1;
 	private Item arma2;
-
+	
 	private Item caixaItem1;
 	private Item caixaItem2;
 	private Item caixaItem3;
@@ -39,6 +39,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	private Item frenteCoracaoHud3;
 	private Item armaHud1;
 	private Item armaHud2;
+	private Item flipArmasHud;
 
 	private Item explosaoCaveira1;
 	private Item explosaoCaveira2;
@@ -89,6 +90,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.coracao = null;
 		this.arma1 = null;
 		this.arma2 = null;
+		this.flipArmasHud = null;
 
 		this.baseHudEsq = null;
 		this.baseHudDir = null;
@@ -158,6 +160,9 @@ public class ConnorsRedemption extends Game implements KeyListener {
 
 		this.armaHud1 = new Item("armaHud1", imagens.getArma1(), 0, 0);
 		this.armaHud2 = new Item("armaHud2", imagens.getArma2(), 0, 0);
+		this.flipArmasHud = new Item("FlipeArmasHud", imagens.getFlipArmasHud(),getWidth()-45, getHeight()-575);
+		
+		
 
 		this.arma1 = new Item("arma1", imagens.getArma1(), 0, 0);
 		this.arma2 = new Item("arma2", imagens.getArma2(), 0, 0);
@@ -186,6 +191,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		colisaoConnorArma();
 		colisaoBalaCaixaItem();
 		colisaoConnorCaixaCaveira();
+		
 
 	}
 
@@ -207,6 +213,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 
 		g.drawImage(this.arma1.getImgItem(), this.arma1.getRotacao(), null);
 		g.drawImage(this.arma2.getImgItem(), this.arma2.getRotacao(), null);
+		g.drawImage(this.flipArmasHud.getImgItem(), flipArmasHud.getRotacao(), null);
 
 		g.drawImage(this.caixaItem1.getImgItem(), this.caixaItem1.getRotacao(), null);
 		g.drawImage(this.caixaItem2.getImgItem(), this.caixaItem2.getRotacao(), null);
@@ -219,6 +226,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		g.drawImage(this.explosaoCaveira1.getImgItem(), this.explosaoCaveira1.getRotacao(), null);
 		g.drawImage(this.explosaoCaveira2.getImgItem(), this.explosaoCaveira2.getRotacao(), null);
 		g.drawImage(this.explosaoCaveira3.getImgItem(), this.explosaoCaveira3.getRotacao(), null);
+		
 	}
 
 	public void keyTyped(KeyEvent e) {
@@ -335,7 +343,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 			this.caixaItem2 = new Item("caixaItem2", null, -300, -300);
 			this.arma1 = new Item("arma1", null, -400, -400);
 
-			this.armaHud1.trasladar(getWidth() - 50, getHeight() - 550);
+			this.armaHud1.trasladar(getWidth() - 40, getHeight() - 550);
 		}
 
 		if (connor.colidiuArma(arma2, connor) && caixaItemDestruida3) {
@@ -343,7 +351,7 @@ public class ConnorsRedemption extends Game implements KeyListener {
 			this.caixaItem3 = new Item("caixaItem3", null, -400, -400);
 			this.arma2 = new Item("arma2", null, -500, -500);
 
-			this.armaHud2.trasladar(getWidth() - 50, getHeight() - 530);
+			this.armaHud2.trasladar(getWidth() - 40, getHeight() - 530);
 
 		}
 	}
