@@ -2,7 +2,6 @@ package connorsRedemption;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -74,9 +73,6 @@ public class ConnorsRedemption extends Game implements KeyListener {
 	private boolean caixaItemDestruida2;
 	private boolean caixaItemDestruida3;
 
-	//private boolean caixaICaveiraDestruida1; // tentei usar a mesma boleana pra todas cxs mas deu muito b.o
-	//private boolean caixaICaveiraDestruida2;
-	//private boolean caixaICaveiraDestruida3;
 
 	public ConnorsRedemption() {
 		this.getJanelaPrincipal().addKeyListener(this);
@@ -114,10 +110,6 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		this.caixaItemDestruida1 = false;
 		this.caixaItemDestruida2 = false;
 		this.caixaItemDestruida3 = false;
-
-		//this.caixaICaveiraDestruida1 = false;
-		//this.caixaICaveiraDestruida2 = false;
-		//this.caixaICaveiraDestruida3 = false;
 
 		this.explosaoCaveira1 = null;
 		this.explosaoCaveira2 = null;
@@ -193,8 +185,6 @@ public class ConnorsRedemption extends Game implements KeyListener {
 		colisaoBalaCaixaItem();
 		colisaoConnorCaixaCaveira();
 		
-		
-
 	}
 
 	public void onDesenhar(Graphics2D g) {
@@ -382,7 +372,6 @@ public class ConnorsRedemption extends Game implements KeyListener {
 					this.inimigo.setNoAtual(this.noAux);
 					this.inimigo.setAchou(true);
 				}
-
 			}
 			*/
 			this.inimigo.andarBaixo();

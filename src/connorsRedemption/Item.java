@@ -12,6 +12,10 @@ public class Item {
 	private double posY;
 	private int rotItem;
 	private boolean perdeuVida;
+	private double posRamdomLimite;
+	private double ramdomX;
+	private double ramdomY;
+	
 
 	// private AudioClip audioItem;
 
@@ -116,7 +120,26 @@ public class Item {
 		}
 		return false;
 	}
+	
+	public static double setRamdomLimite(char eixo) {
+				
+		double minX = 800  - 700;
+		double maxX = 800 - 100; 
+		
+		double minY = 600 - 500;
+		double maxY = 600- 150;
 
+		if (eixo == 'x') {
+			double ramdomX = Math.floor(Math.random() * (maxX - minX + 1)) + minX;
+			return ramdomX;
+		}
+
+		if (eixo == 'y') {
+			double ramdomY = Math.floor(Math.random() * (maxY - minY + 1)) + minY;
+			return ramdomY;
+		}
+		return (Double) null;
+	}
 
 }
 
